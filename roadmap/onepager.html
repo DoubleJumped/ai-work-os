@@ -1,0 +1,388 @@
+<title>AI Program Roadmap — Sample One-Pager</title>
+<style>
+  :root {
+    --paper: #F4F7F9;
+    --card: #FFFFFF;
+    --ink: #16232D;
+    --ink-2: #4A5D6B;
+    --ink-3: #7A8B97;
+    --line: #D8E0E6;
+    --accent: #1F6FB2;
+    --accent-soft: #E3EEF7;
+    --platform: #3D5A70;
+    --platform-soft: #E8EDF1;
+    --amber: #B87A1E;
+    --amber-soft: #F6ECDC;
+    --good: #2E7D5B;
+    --good-soft: #E1F0E9;
+    --shadow: 0 1px 2px rgba(22,35,45,.06), 0 4px 14px rgba(22,35,45,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0E1922;
+      --card: #16242F;
+      --ink: #E5EDF2;
+      --ink-2: #A4B6C2;
+      --ink-3: #6E8290;
+      --line: #26394707;
+      --line: #263947;
+      --accent: #5BA3DC;
+      --accent-soft: #16324A;
+      --platform: #8FA9BC;
+      --platform-soft: #1B2B38;
+      --amber: #D99A3D;
+      --amber-soft: #33270F;
+      --good: #58B48C;
+      --good-soft: #12312400;
+      --good-soft: #123124;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0E1922; --card: #16242F; --ink: #E5EDF2; --ink-2: #A4B6C2; --ink-3: #6E8290;
+    --line: #263947; --accent: #5BA3DC; --accent-soft: #16324A; --platform: #8FA9BC;
+    --platform-soft: #1B2B38; --amber: #D99A3D; --amber-soft: #33270F; --good: #58B48C;
+    --good-soft: #123124; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  }
+  :root[data-theme="light"] {
+    --paper: #F4F7F9; --card: #FFFFFF; --ink: #16232D; --ink-2: #4A5D6B; --ink-3: #7A8B97;
+    --line: #D8E0E6; --accent: #1F6FB2; --accent-soft: #E3EEF7; --platform: #3D5A70;
+    --platform-soft: #E8EDF1; --amber: #B87A1E; --amber-soft: #F6ECDC; --good: #2E7D5B;
+    --good-soft: #E1F0E9; --shadow: 0 1px 2px rgba(22,35,45,.06), 0 4px 14px rgba(22,35,45,.05);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Avenir Next", "Avenir", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.45;
+    margin: 0;
+    padding: 40px 28px 64px;
+  }
+  .sheet { max-width: 1140px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px; }
+
+  .mono { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 600;
+  }
+
+  /* ── header ── */
+  header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
+  h1 {
+    font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -.01em;
+    margin: 6px 0 4px; text-wrap: balance;
+  }
+  .subtitle { color: var(--ink-2); font-size: 14px; max-width: 62ch; margin: 0; }
+  .sample-tag {
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600;
+    color: var(--amber); background: var(--amber-soft);
+    padding: 5px 10px; border-radius: 4px; white-space: nowrap;
+  }
+
+  /* ── strategy strip ── */
+  .strategy { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .strat-box {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .strat-box .eyebrow { margin-bottom: 6px; }
+  .strat-box p { margin: 0; font-size: 13.5px; color: var(--ink); }
+  .strat-box .big { font-size: 21px; font-weight: 700; letter-spacing: -.01em; }
+  .strat-box .sub { color: var(--ink-2); font-size: 12px; margin-top: 2px; }
+
+  /* ── board ── */
+  .board-wrap { overflow-x: auto; }
+  .board {
+    display: grid;
+    grid-template-columns: 118px repeat(3, minmax(240px, 1fr));
+    gap: 12px;
+    min-width: 900px;
+  }
+  .col-head {
+    text-align: left; padding: 8px 4px 2px;
+  }
+  .col-head .name { font-weight: 700; font-size: 15px; }
+  .col-head .hint { font-size: 12px; color: var(--ink-3); }
+  .band-label {
+    display: flex; flex-direction: column; justify-content: center; gap: 4px;
+    padding: 12px 10px; border-radius: 8px; font-size: 12px; line-height: 1.35;
+  }
+  .band-label strong { font-size: 13px; letter-spacing: .02em; }
+  .band-label.enable { background: var(--accent-soft); color: var(--accent); }
+  .band-label.plat { background: var(--platform-soft); color: var(--platform); }
+  .cell { display: flex; flex-direction: column; gap: 10px; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .card.later { border-style: dashed; background: transparent; box-shadow: none; }
+  .card .top { display: flex; align-items: center; gap: 8px; }
+  .id {
+    font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: .04em;
+  }
+  .id.e { background: var(--accent-soft); color: var(--accent); }
+  .id.p { background: var(--platform-soft); color: var(--platform); }
+  .conf { font-size: 11px; font-weight: 600; margin-left: auto; white-space: nowrap; }
+  .conf.committed { color: var(--good); }
+  .conf.validating { color: var(--amber); }
+  .conf.direction { color: var(--ink-3); }
+  .card h3 { margin: 0; font-size: 14.5px; font-weight: 700; letter-spacing: -.005em; }
+  .card .outcome { margin: 0; font-size: 12.5px; color: var(--ink-2); }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .chip {
+    font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 99px;
+    border: 1px solid var(--line); color: var(--ink-3);
+  }
+  .chip.dep { border-color: transparent; background: var(--platform-soft); color: var(--platform); }
+  .chip.team { border-color: transparent; background: var(--accent-soft); color: var(--accent); }
+
+  /* ── scorecard ── */
+  .scorecard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .pillar {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; box-shadow: var(--shadow);
+  }
+  .pillar .eyebrow { margin-bottom: 8px; }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 4px 0; border-top: 1px solid var(--line); }
+  .stat-row:first-of-type { border-top: 0; }
+  .stat-row .label { font-size: 12.5px; color: var(--ink-2); }
+  .stat-row .val { font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stat-row .val small { font-size: 11px; font-weight: 600; color: var(--ink-3); }
+
+  /* ── cadence ── */
+  .cadence { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .step {
+    background: var(--card); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; box-shadow: var(--shadow); position: relative;
+  }
+  .step .freq { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+  .step h4 { margin: 4px 0 4px; font-size: 13.5px; }
+  .step p { margin: 0; font-size: 12px; color: var(--ink-2); }
+
+  .section-head { display: flex; align-items: baseline; gap: 12px; }
+  .section-head h2 { font-size: 15px; margin: 0; letter-spacing: .01em; }
+  .section-head .note { font-size: 12px; color: var(--ink-3); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--ink-2); }
+  .legend .k { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  footer { color: var(--ink-3); font-size: 12px; border-top: 1px solid var(--line); padding-top: 14px; max-width: 90ch; }
+  footer strong { color: var(--ink-2); }
+
+  @media (max-width: 860px) {
+    .strategy, .scorecard, .cadence { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .strategy, .scorecard, .cadence { grid-template-columns: 1fr; }
+    body { padding: 24px 14px 48px; }
+  }
+</style>
+
+<div class="sheet">
+
+  <header>
+    <div>
+      <div class="eyebrow">SaskEnergy · Technology &amp; Innovation</div>
+      <h1>AI Platform &amp; Enablement Roadmap</h1>
+      <p class="subtitle">One platform, built once — deployed team by team. Every item below is framed as the business outcome it unlocks, not the technology underneath it.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+      <span class="sample-tag">Sample — placeholder content</span>
+      <span class="eyebrow">Q3 FY2026 · Updated monthly</span>
+    </div>
+  </header>
+
+  <!-- strategy strip -->
+  <section>
+    <div class="strategy">
+      <div class="strat-box">
+        <div class="eyebrow">The problem</div>
+        <p>Teams across the company repeat slow, manual document and data work that AI now does reliably — but only with governed tooling and someone to deploy it.</p>
+      </div>
+      <div class="strat-box">
+        <div class="eyebrow">90-day proof point</div>
+        <p><span class="big">2 teams</span></p>
+        <p class="sub">live on the knowledge assistant with measured time savings by end of Q3</p>
+      </div>
+      <div class="strat-box">
+        <div class="eyebrow">One metric that matters</div>
+        <p><span class="big">hrs saved / wk</span></p>
+        <p class="sub">verified hours returned to enabled teams, reported quarterly</p>
+      </div>
+      <div class="strat-box">
+        <div class="eyebrow">The ask</div>
+        <p>Champion access in 2 more business units next quarter, and 30 min/month of steering-review time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- roadmap board -->
+  <section>
+    <div class="section-head" style="margin-bottom:10px;">
+      <h2>Roadmap — Now / Next / Later</h2>
+      <span class="note">dates live only in “Now”; Next and Later are direction, not commitments</span>
+    </div>
+    <div class="board-wrap">
+      <div class="board">
+        <div></div>
+        <div class="col-head"><div class="name">Now</div><div class="hint">committed · in delivery this quarter</div></div>
+        <div class="col-head"><div class="name">Next</div><div class="hint">validated · 1–2 quarters out</div></div>
+        <div class="col-head"><div class="name">Later</div><div class="hint">strategic direction · unscheduled</div></div>
+
+        <!-- enablement band -->
+        <div class="band-label enable"><strong>Enablement</strong>teams served &amp; wins delivered</div>
+        <div class="cell">
+          <div class="card">
+            <div class="top"><span class="id e mono">E1</span><span class="conf committed">● committed</span></div>
+            <h3>Customer Service knowledge assistant</h3>
+            <p class="outcome">Agents answer policy &amp; procedure questions in seconds instead of searching manuals — target 4 hrs/agent/week returned.</p>
+            <div class="chips"><span class="chip team">Customer Service</span><span class="chip dep">built on P1</span><span class="chip dep">P2</span></div>
+          </div>
+          <div class="card">
+            <div class="top"><span class="id e mono">E2</span><span class="conf committed">● committed</span></div>
+            <h3>Copilot enablement — wave 1</h3>
+            <p class="outcome">Champions trained in 3 departments; shared prompt &amp; agent library seeded via the “rule of three.”</p>
+            <div class="chips"><span class="chip team">Cross-functional</span><span class="chip dep">built on P3</span></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="card">
+            <div class="top"><span class="id e mono">E3</span><span class="conf validating">◐ validating</span></div>
+            <h3>Regulatory &amp; compliance drafting</h3>
+            <p class="outcome">First-draft filings and responses generated from source documents with full audit trail.</p>
+            <div class="chips"><span class="chip team">Regulatory Affairs</span><span class="chip dep">built on P1</span><span class="chip dep">P4</span></div>
+          </div>
+          <div class="card">
+            <div class="top"><span class="id e mono">E4</span><span class="conf validating">◐ validating</span></div>
+            <h3>Field ops procedure lookup</h3>
+            <p class="outcome">Technicians retrieve safety protocols and equipment procedures on site, hands-free.</p>
+            <div class="chips"><span class="chip team">Field Operations</span><span class="chip dep">built on P1</span></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="card later">
+            <div class="top"><span class="id e mono">E5</span><span class="conf direction">○ direction</span></div>
+            <h3>Team-built agents, self-serve</h3>
+            <p class="outcome">Business units build their own governed automations; central role shifts from delivery to advisory.</p>
+            <div class="chips"><span class="chip team">All units</span><span class="chip dep">built on P3</span><span class="chip dep">P5</span></div>
+          </div>
+        </div>
+
+        <!-- platform band -->
+        <div class="band-label plat"><strong>Platform</strong>capabilities underneath every win</div>
+        <div class="cell">
+          <div class="card">
+            <div class="top"><span class="id p mono">P1</span><span class="conf committed">● in production</span></div>
+            <h3>Document intelligence core (RAG)</h3>
+            <p class="outcome">Turns any team’s documents into a searchable, auditable knowledge source. Build once, point at each new corpus.</p>
+            <div class="chips"><span class="chip">unlocks E1 · E3 · E4</span></div>
+          </div>
+          <div class="card">
+            <div class="top"><span class="id p mono">P2</span><span class="conf committed">● committed</span></div>
+            <h3>Governed agent harness</h3>
+            <p class="outcome">Curated templates, security standards, and automated review checks so every AI build is compliant by default.</p>
+            <div class="chips"><span class="chip">unlocks E1 · all future builds</span></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="card">
+            <div class="top"><span class="id p mono">P3</span><span class="conf validating">◐ validating</span></div>
+            <h3>Shared automation library</h3>
+            <p class="outcome">Every automation built for one team is packaged and reusable by the next — the compounding mechanism.</p>
+            <div class="chips"><span class="chip">unlocks E2 · E5</span></div>
+          </div>
+          <div class="card">
+            <div class="top"><span class="id p mono">P4</span><span class="conf validating">◐ validating</span></div>
+            <h3>Evaluation &amp; audit framework</h3>
+            <p class="outcome">Automated accuracy checks and audit trails that let high-stakes teams (regulatory, safety) adopt with confidence.</p>
+            <div class="chips"><span class="chip">unlocks E3</span></div>
+          </div>
+        </div>
+        <div class="cell">
+          <div class="card later">
+            <div class="top"><span class="id p mono">P5</span><span class="conf direction">○ direction</span></div>
+            <h3>Self-serve builder platform</h3>
+            <p class="outcome">Guardrailed environment where trained staff assemble their own agents from approved components.</p>
+            <div class="chips"><span class="chip">unlocks E5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- scorecard -->
+  <section>
+    <div class="section-head" style="margin-bottom:10px;">
+      <h2>Program scorecard</h2>
+      <span class="note">three pillars — capability built, not just dollars saved · reported quarterly</span>
+    </div>
+    <div class="scorecard">
+      <div class="pillar">
+        <div class="eyebrow">Readiness — people &amp; governance</div>
+        <div class="stat-row"><span class="label">Staff trained on approved AI tools</span><span class="val">64</span></div>
+        <div class="stat-row"><span class="label">Department champions active</span><span class="val">6</span></div>
+        <div class="stat-row"><span class="label">Builds passing governance review first-time</span><span class="val">100<small>%</small></span></div>
+      </div>
+      <div class="pillar">
+        <div class="eyebrow">System health — what’s running</div>
+        <div class="stat-row"><span class="label">Use cases in production</span><span class="val">2</span></div>
+        <div class="stat-row"><span class="label">Reusable components in library</span><span class="val">9</span></div>
+        <div class="stat-row"><span class="label">Weekly active users (of enabled seats)</span><span class="val">71<small>%</small></span></div>
+      </div>
+      <div class="pillar">
+        <div class="eyebrow">Value — hours returned</div>
+        <div class="stat-row"><span class="label">Verified hours saved / week</span><span class="val">38</span></div>
+        <div class="stat-row"><span class="label">Avg. delivery time per use case</span><span class="val">3 <small>wks</small></span></div>
+        <div class="stat-row"><span class="label">Intake queue (scored &amp; prioritized)</span><span class="val">11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- cadence -->
+  <section>
+    <div class="section-head" style="margin-bottom:10px;">
+      <h2>How this roadmap stays true</h2>
+      <span class="note">the same file traces from daily work to this page — nothing is reconstructed from memory</span>
+    </div>
+    <div class="cadence">
+      <div class="step">
+        <div class="freq">Daily · 2 min</div>
+        <h4>Worklog note</h4>
+        <p>Decisions, deltas, and unblocks captured as they happen — each line tagged to a roadmap item (E1, P2…).</p>
+      </div>
+      <div class="step">
+        <div class="freq">Weekly · Friday</div>
+        <h4>Auto-drafted rollup</h4>
+        <p>Claude reads the week’s notes + calendar/chat activity and drafts the status update; human edits and sends.</p>
+      </div>
+      <div class="step">
+        <div class="freq">Monthly</div>
+        <h4>Roadmap refresh</h4>
+        <p>Cards move between Now / Next / Later; scorecard numbers update; PowerPoint export regenerated for upward sharing.</p>
+      </div>
+      <div class="step">
+        <div class="freq">Quarterly</div>
+        <h4>Review with narrative pre-read</h4>
+        <p>Short written memo + this one-pager to director-level; decisions requested explicitly, not implied.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="legend">
+    <span class="k"><span class="dot" style="background:var(--good)"></span>committed — dated, in delivery</span>
+    <span class="k"><span class="dot" style="background:var(--amber)"></span>validating — scoped, discovery underway</span>
+    <span class="k"><span class="dot" style="border:1.5px solid var(--ink-3); background:transparent"></span>direction — strategic intent, no date</span>
+    <span class="k"><span class="id p mono" style="font-size:10px">P#</span>platform capability</span>
+    <span class="k"><span class="id e mono" style="font-size:10px">E#</span>enablement engagement</span>
+  </div>
+
+  <footer>
+    <strong>How to use this template:</strong> all content above is illustrative placeholder — replace teams, items, and numbers with real ones. This HTML page is the maintenance surface (fast to update with Claude); for the upward hop, export a PowerPoint one-pager — directors present and forward .pptx, not web links. Keep dates out of Next/Later; frame every platform item by the enablement wins it unlocks.
+  </footer>
+
+</div>
