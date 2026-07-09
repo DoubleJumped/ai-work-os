@@ -1,0 +1,52 @@
+---
+topic: Enterprise AI vendor lanes — OpenAI vs Anthropic vs Microsoft for org-wide deployment
+volatility: check-monthly
+related: model-pricing.md, canadian-data-requirements.md, P1, P2, E2
+---
+
+# Enterprise AI lanes: OpenAI · Anthropic · Microsoft
+
+Context for this comparison: ~1,000+ knowledge workers, **~15 heavy coding-agent users**, Canadian Crown corporation, existing M365 tenant. All prices USD list. Full residency/legal detail: [canadian-data-requirements.md](canadian-data-requirements.md).
+
+## Seat pricing at a glance (as of 2026-07-09)
+
+| | OpenAI | Anthropic | Microsoft |
+|---|---|---|---|
+| Entry business tier | ChatGPT Business **$20/seat/mo** (annual; min 2) | Claude Team standard **$20/seat/mo** (annual; min 5; no Claude Code) | Copilot Chat **free** with M365 (no Graph grounding) |
+| Full enterprise tier | ChatGPT Enterprise **~$40–75/seat** (sales-gated, no list price; 150-seat/annual minimum widely reported, unconfirmed) | Claude Enterprise **~$20/seat access + ALL tokens metered at API rates** (self-serve min 20 seats) | M365 Copilot **$30/seat** add-on (base E3 $39 / E5 ~$60); **E7 bundle $99** (E5+Copilot+Agent 365+Entra) |
+| Coding seats | Codex bundled, shares credit pool; heavy use ≈ **$100–200/dev/mo** effective | Team **Premium $100/seat** (Claude Code); or Enterprise metered | GitHub Copilot Business **$19** / Enterprise **$39** + usage credits (heavy agentic use overruns included credits) |
+| Billing model risk | Apr 2026 switch to shared token-credit pools — heavy users drain org credits | Nov 2025–Feb 2026: bundled tokens REMOVED from Enterprise — seat = access only | GitHub Copilot went usage-based Jun 2026; Copilot Studio agents 1–100+ credits/interaction |
+
+(sources: https://learn.chatgpt.com/docs/pricing · https://claude.com/pricing · https://support.claude.com/en/articles/9797531 · https://www.microsoft.com/en-us/microsoft-365-copilot/pricing · https://github.com/features/copilot/plans — all checked 2026-07-09)
+
+Structural fact all three now share: **flat-rate AI is disappearing.** Every lane moved toward metered usage in 2026. Spend caps and model-default governance are now a required admin skill in any lane — plan for that regardless of vendor.
+
+## The three lanes, honestly
+
+**Microsoft — best boundary, worst engagement.** Strongest data story for a Crown corp: everything inside the tenant, Purview/eDiscovery native, Canada at-rest residency now, in-country processing "2026" (date slipped after an April refinement — unconfirmed). Most mature rollout machinery (adoption playbooks, Copilot Dashboard, FastTrack). But independently reported adoption is poor — only ~20–30% of *paying* seats weekly-active, ~64% inactive licenses — and Copilot itself now hosts Claude models (default-on since Jan 2026), which reads as an admission the in-house experience trails. **Landmine: Anthropic-routed Copilot interactions are excluded from in-country processing commitments — scope or disable via Entra groups; keep "Preview models with data retention" OFF** (those run under Anthropic's terms, not Microsoft's DPA). (as of 2026-07-09, sources: https://learn.microsoft.com/en-us/microsoft-365/copilot/connect-to-ai-subprocessor · https://www.windowslatest.com/2026/07/07/microsoft-365-copilot-adoption-is-under-4-5-after-3-years-only-1-use-it-weekly-yet-prices-went-up/)
+
+**Anthropic — best agents and enablement momentum, hardest to price at scale.** Overtook OpenAI in enterprise adoption share in 2026 (34.4% vs 32.3%; ~$30B ARR). Best-regarded coding agent (Claude Code: ~46% "most loved" vs ~9% GitHub Copilot in dev surveys; leads SWE-bench Pro), the FDE/champions enablement playbook, MCP as the industry integration standard, and the two most relevant proof points: Deloitte 470k seats and **Alberta — a Canadian government running Claude Code at scale**. Weaknesses: Enterprise seats are access-only with metered tokens (unpredictable at 1,000-knowledge-worker scale), Cowork's web/mobile is still beta rolling out, and **first-party Canada residency is "coming 2026," not live** — the workable path is Bedrock ca-central-1 (at-rest in Canada, inference cross-region unless pinned to ca-central-1-native models). (as of 2026-07-09, sources: https://claude.com/regional-compliance · https://venturebeat.com/technology/anthropic-finally-beat-openai-in-business-ai-adoption-but-3-big-threats-could-erase-its-lead)
+
+**OpenAI — biggest footprint, most churn, middle on everything else.** 7M+ workplace seats, 93% of Fortune 500 touch it, strongest user *preference* pull (employees already use ChatGPT). Canada **is** a live at-rest residency region for Enterprise at no extra cost — ahead of Anthropic first-party — but **inference still defaults to US** (in-region+ZDR guarantees are on the API path, not the ChatGPT app). Enterprise pricing is opaque and sales-gated; 2026 product churn is the highest of the three (Business rename, Frontier, AgentKit, Workspace Agents, DeployCo, billing overhaul — all within ~12 months), which taxes governance and training material. (as of 2026-07-09, sources: https://openai.com/index/expanding-data-residency-access-to-business-customers-worldwide/ · https://help.openai.com/en/articles/9903489)
+
+## Who's enabling enterprises best (assessment, not fact)
+
+**Anthropic, on the evidence — with a caveat.** The adoption-share flip, the enablement playbook depth (FDE model, champions structure, published admin guides), MCP becoming the cross-vendor standard, and peer-relevant deployments (Alberta) make Anthropic the strongest *enablement* story in 2026. Microsoft has the best *governance machinery* but demonstrably struggles to convert licenses into usage; OpenAI has the best *reach* but its enterprise motion is the most contested and churny. The caveat: every lane's outcomes depend more on internal change management than on the vendor (BCG's 10-20-70), and Microsoft's best-in-class deployments (Wipro 95% MAU) prove the incumbent works *when the internal program is strong*.
+
+## The recommendation shape for our profile
+
+The 15-heavy-coders fact is the unlock: **the coding lane is small enough to buy on quality, not incumbency.** 15 × Claude Team Premium = ~$18k/yr — rounding error vs any org-wide decision, and Alberta is the ready-made precedent (Crown + Claude Code + Bedrock Canada). That points to a two-speed architecture:
+
+1. **Coding/platform lane (15 users + my platform builds): Anthropic.** Claude Code on Team Premium (predictable) or Enterprise (governance + metered), models via Bedrock ca-central-1 for anything touching sensitive data. Strongest tool, Canadian precedent, contained cost.
+2. **Knowledge-worker lane (~985): Microsoft Copilot, deployed to measured cohorts — never tenant-wide up front.** The incumbent boundary/procurement advantages are real, but the adoption data says license waves without champions become shelfware. Buy seats behind the champions program (E2), expand on measured weekly-active + hours-saved, and let free Copilot Chat cover the long tail.
+3. **OpenAI: hold as challenger.** Real leverage in every negotiation, and the API (with Canada residency + ZDR) is a legitimate option for specific custom builds. Adopting it as a third *seat* platform adds governance surface without a distinct advantage today.
+
+Decision triggers to watch: Anthropic Canada region GA (removes the Bedrock workaround); Microsoft Canada in-country processing GA (strengthens lane 2); Cowork Team/Enterprise web GA (changes the knowledge-worker calculus); any ChatGPT Enterprise flexible-pricing confirmation below ~150 seats.
+
+## Verify before relying on (flagged unverified as of 2026-07-09)
+
+- ChatGPT Enterprise 150-seat/annual minimum (contradicted by OpenAI "flexible pricing" framing) and exact per-seat price — sales conversation required.
+- Microsoft Canada in-country *processing* GA date ("2026, refined April 2026" — no month).
+- Whether flagship Claude models are ca-central-1-*native* on Bedrock (vs cross-region profiles) — determines if inference can stay in Canada.
+- Anthropic Agent SDK billing (credit-pool change paused 2026-06-15).
+- CAD list pricing for all vendors (all figures above are USD).
