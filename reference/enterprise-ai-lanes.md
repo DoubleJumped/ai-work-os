@@ -43,6 +43,25 @@ The 15-heavy-coders fact is the unlock: **the coding lane is small enough to buy
 
 Decision triggers to watch: Anthropic Canada region GA (removes the Bedrock workaround); Microsoft Canada in-country processing GA (strengthens lane 2); Cowork Team/Enterprise web GA (changes the knowledge-worker calculus); any ChatGPT Enterprise flexible-pricing confirmation below ~150 seats.
 
+## If the pick is OpenAI across the board (single-vendor play)
+
+Political feasibility is a legitimate decision criterion, and the research genuinely supports parts of this play — the two-lane analysis above stays on record as the trade-off ledger.
+
+**What supports it:**
+- **Strongest user pull of any lane** — employees already prefer ChatGPT (one Q1 2026 enterprise survey: 76% name it their primary AI tool vs 18% Copilot), which is the best predictor of avoiding the Copilot shelfware problem. "Easier over the finish line" applies to *adoption*, not just procurement.
+- **One vendor = one PIA, one DPA, one security review, one training curriculum** — real cost savings for a small enablement function.
+- **Canada at-rest residency is live for Enterprise at no extra cost** — ahead of Anthropic first-party today.
+- **One credit pool covers both lanes**: Business/Enterprise seats for knowledge workers, Codex bundled for the 15 coders — no second procurement for the coding lane.
+- **GPT-5.6 (2026-07-09) is credibly frontier** — Codex was already near-parity with Claude Code on well-scoped tasks; 5.6-generation evals aren't in yet, but the standardize-on-one-frontier-vendor bet is defensible in a way it wasn't a year ago.
+
+**What to nail down before recommending (in priority order):**
+1. **Inference residency in writing.** Canada residency is confirmed *at rest* only; ChatGPT-product inference defaults to US. Get OpenAI's written answer on inference location + ZDR scope for the ChatGPT app — this is the PIA hinge and the whole risk-acceptance paragraph.
+2. **Enterprise minimums and price.** The 150-seat/annual minimum is widely reported but contradicted by OpenAI's "flexible pricing" framing — a sales conversation settles it. Fallback: start on Business ($20/seat, self-serve, min 2) and graduate.
+3. **Budget the 15 coders separately.** Codex is "bundled" but heavy agentic use ≈ $100–200/dev/mo in credits from the shared pool — set spend controls before the pool silently drains, not after.
+4. **Churn management.** OpenAI shipped a rename, two agent platforms, a billing-model change, and four model generations in ~12 months; assign someone (you) to keep governance/training material current, and version it.
+
+**Keep it reversible (the one architectural condition):** every Tier-1 Canadian adopter (Shopify, Wealthsimple, CIBC — see canadian-ai-adopters.md) runs *multiple tools behind one governed gateway*, not a single-vendor mandate. Single-vendor at the *seat* layer is fine; build the platform layer (P1/P2) vendor-neutral — MCP-based, gateway-routed — so Claude Code or others can be added for the 15 later without re-procurement if Codex disappoints. The seats are a contract; the architecture is the commitment. (added 2026-07-11)
+
 ## Verify before relying on (flagged unverified as of 2026-07-09)
 
 - ChatGPT Enterprise 150-seat/annual minimum (contradicted by OpenAI "flexible pricing" framing) and exact per-seat price — sales conversation required.

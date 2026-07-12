@@ -1,11 +1,11 @@
-# 07 — Porting this to work (SaskEnergy instance)
+# 07 — Porting this to work (the org instance)
 
-**The home repo is the template; the work instance is a OneDrive/SharePoint folder in the SaskEnergy tenant. Work content never touches personal GitHub; the template never contains work content. Improvements to the *system* (prompts, docs, conventions) flow home→work as files; facts never flow work→home.**
+**The home repo is the template; the work instance is a OneDrive/SharePoint folder in the org's M365 tenant. Work content never touches personal GitHub; the template never contains work content. Improvements to the *system* (prompts, docs, conventions) flow home→work as files; facts never flow work→home.**
 
 ## One-time setup checklist
 
 1. **Create the folder in OneDrive** (work account): copy this repo's structure minus `.git`. OneDrive placement is load-bearing, not convenience — Cowork's *scheduled* jobs run in the cloud and cannot reach local-only folders, and SharePoint/OneDrive is what makes every file linkable in rollups.
-2. **Transfer the template once.** Zip download from the private GitHub repo via browser, or a fine-grained PAT (single repo, read-only, short expiry) if the browser path is blocked — then revoke it. Check acceptable-use policy before putting any personal token on a work machine; the zip is the low-friction path.
+2. **Transfer the template once.** The repo is public — zip download from GitHub in any browser, no login needed.
 3. **Ask IT about the Microsoft 365 connector for Claude** — Anthropic's sanctioned MCP integration (read-only, delegated permissions, honors existing access controls, audit-logged). It needs Entra tenant-wide admin consent, so this is an official request, not a personal setting. As AI Specialist you're the natural sponsor — and shepherding it through review is itself a P-item (it unblocks every future Claude use case org-wide, yours included).
 4. **Set up the Friday job** (docs/04) and a **Copilot Scheduled Prompt** in parallel for the first month.
 5. **Create the boss-facing surface:** a SharePoint page (or shared folder) where the rollup mirror and the roadmap one-pager live at stable URLs. Send your boss exactly one link, once.

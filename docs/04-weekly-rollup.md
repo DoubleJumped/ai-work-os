@@ -24,7 +24,7 @@ Plus three short sections: **Intake movement** (new U#s, score changes), **Learn
 Format rules the prompt enforces (`prompts/friday-rollup.md`):
 
 - **Outcomes, not activity.** "Cut E3's cost assumption in half" — not "did pricing research." If a week's work on an item produced no outcome worth a headline, it gets one line under a catch-all "Also moved," not a padded section.
-- **Plain language.** The reader is a manager, then a director. No model names without a gloss, no acronyms that aren't already SaskEnergy vocabulary.
+- **Plain language.** The reader is a manager, then a director. No model names without a gloss, no acronyms that aren't already house vocabulary.
 - **Links on headlines** so a curious reader can drill down — to the SharePoint copies in the work instance (docs/07).
 
 ## Setting up the job
