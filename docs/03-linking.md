@@ -19,10 +19,10 @@ IDs are assigned once, never re-used. `roadmap/roadmap.md` and `intake/queue.md`
 **1. The fact lands in the library** — `reference/model-pricing.md`:
 
 ```markdown
-## 5.6 family (SAMPLE DATA — placeholder numbers)
-- Luna:  $0.80 / MTok in, $4 / MTok out  (as of 2026-07-09, source: vendor pricing page)
-- Terra: $1.60 / MTok in, $8 / MTok out  (as of 2026-07-09, source: vendor pricing page)
-- Sol:   $4.00 / MTok in, $20 / MTok out (as of 2026-07-09, source: vendor pricing page)
+## GPT-5.6 family (simplified excerpt — the real file carries full pricing tables)
+- Luna:  $1.00 / MTok in, $6 / MTok out  (as of 2026-07-09, source: vendor pricing page)
+- Terra: $2.50 / MTok in, $15 / MTok out (as of 2026-07-09, source: vendor pricing page)
+- Sol:   $5.00 / MTok in, $30 / MTok out (as of 2026-07-09, source: vendor pricing page)
 Implication: Luna meets the E3 drafting quality bar at ~½ the cost assumed in the E3 estimate.
 ```
 

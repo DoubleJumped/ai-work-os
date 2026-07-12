@@ -21,13 +21,13 @@
 
 Two consequences:
 
-- **The .docx mirror.** Anything Copilot should be able to see (your boss asking Copilot "what's Graeme's team shipping?") needs a Word/PDF copy in OneDrive. The Friday job emits it automatically. Markdown stays canonical; mirrors are disposable output.
+- **The .docx mirror.** Anything Copilot should be able to see (your boss asking Copilot "what's your team shipping?") needs a Word/PDF copy in OneDrive. The Friday job emits it automatically. Markdown stays canonical; mirrors are disposable output.
 - **Don't duplicate the Graph.** Mail, meetings, chats live where they live; both tools query them in place.
 
-## Governance rules (Crown corporation — these are hard rules)
+## Governance rules (regulated / public-sector org — these are hard rules)
 
 1. **Author-only content.** The repo contains what *you* wrote: your notes, your distilled research, your item logs. Never bulk-copy colleagues' chats, emails, shared OneNotes, or meeting transcripts into it — even ones you can legitimately read. Copying pulls content out from under DLP, retention, and sensitivity labels; querying it live via sanctioned connectors is the compliant path. (An Ontario Auditor General report on unsanctioned AI use in government is the cautionary tale — and the strongest argument for your role existing.)
-2. **Reference facts vs. work data.** "Luna costs $X (public pricing page)" is a fact — fine anywhere. "Our Q3 gas volume forecast" is work data — work instance only, never the home template, never personal GitHub.
+2. **Reference facts vs. work data.** "Luna costs $X (public pricing page)" is a fact — fine anywhere. "Our Q3 revenue forecast" is work data — work instance only, never the home template, never personal GitHub.
 3. **Every automation you run is a future policy question.** You're the person who'll write the org's rules for this; run your own system the way you'd defend it in an audit: sanctioned connectors, delegated permissions, no scraping, sources cited.
 4. **When in doubt, this system is your best demo.** "Here's how I run my own work — governed, auditable, compounding" is the most credible enablement pitch you'll ever give a skeptical team. Practice-what-you-preach is the product.
 

@@ -16,7 +16,7 @@ The closest published analog to this role: a government's open-sourced playbook 
 
 - **The Well-Built Harness** — curated templates + standards + review agents so anyone's AI output converges on compliant results; never let AI author the harness itself. https://thevelocitywhitepapers.com/paper/p7p2k/
 - **The AI Academy** — the **"rule of three"**: anything done 3+ times/week becomes a shared reusable agent. This repo's compounding mechanism, made teachable. https://thevelocitywhitepapers.com/paper/dt725/
-- **Measuring Failure and Success** — the three-pillar scorecard (Readiness / System Health / Cost) this roadmap uses. https://thevelocitywhitepapers.com/paper/yu5k9/
+- **Measuring Failure and Success** — the three-pillar scorecard (Readiness / System Health / Cost) this roadmap adapts, broadening the third pillar to Value (capability built, not just dollars saved). https://thevelocitywhitepapers.com/paper/yu5k9/
 - **The Shape of Data** — "the pipeline is the part that matters"; auditability as the differentiator. https://thevelocitywhitepapers.com/paper/wq3kd/
 - Anthropic's case study on the program: https://www.anthropic.com/news/alberta-government-claude-cybersecurity
 - **Caution:** the headline numbers (95% reductions, "1 agent ≈ 20 workers") are first-party and unaudited. Borrow the frameworks confidently; present the numbers as "Alberta's reported results, to validate in our own pilots."

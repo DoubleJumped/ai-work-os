@@ -41,6 +41,6 @@ This folder is a personal work OS: worklogs, a research reference library, a liv
 
 ## Hard rules
 
-- This is the HOME TEMPLATE: sample content only. Never put real employer data, names of colleagues, or work-confidential material in this copy.
+- This is the HOME TEMPLATE: sample content and your own general research only. Never put real employer data, names of colleagues, or work-confidential material in this copy.
 - (Work instance) never copy other people's chats, emails, or shared documents into this repo — query them live via connectors instead. Only content the owner authored belongs here.
 - Never delete files without being asked; archive instead (`docs/06`).

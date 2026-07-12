@@ -29,7 +29,7 @@ For business cases: documented deployments only, with confidence flagged. (as of
 
 ## The Saskatchewan white space (explicit negatives, searched 2026-07)
 
-**No documented coding-assistant deployment exists for any Saskatchewan organization** — SaskPower, SaskTel, SaskEnergy, Vendasta, 7shifts, Nutrien, Cameco all searched, nothing citable found. Cuts both ways: no local precedent to lean on, but "first documented Saskatchewan Crown to do this properly" is a leadership story for the director — with Alberta next door as the de-risking precedent.
+**No documented coding-assistant deployment exists for any Saskatchewan organization** — SaskPower, SaskTel, Vendasta, 7shifts, Nutrien, Cameco, and the remaining Crown corporations all searched, nothing citable found. Cuts both ways: no local precedent to lean on, but "first documented Saskatchewan Crown to do this properly" is a leadership story for the director — with Alberta next door as the de-risking precedent.
 
 ## Honesty flags for any deck
 

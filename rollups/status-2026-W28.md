@@ -16,7 +16,7 @@ Decided automated review checks run in the build pipeline rather than as a manua
 **Next step:** wire the checks into the E1 pilot build as the first real test.
 
 ### Intake movement
-- New: U4 — French-language support for the CS assistant (via Anna, Regulatory) — scored 61, hold until the eval framework handles bilingual corpora.
+- New: U4 — French-language support for the CS assistant (via the Reg. Affairs lead) — scored 61, hold until the eval framework handles bilingual corpora.
 
 ### Learned this week
 - [model-pricing.md](../reference/model-pricing.md) — 5.6 family pricing filed; [model-families.md](../reference/model-families.md) — Sol/Terra/Luna definitions.

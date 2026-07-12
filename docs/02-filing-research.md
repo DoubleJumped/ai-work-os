@@ -2,7 +2,7 @@
 
 **The rule: research is filed the moment it happens, as part of the same session — never "organized later." Later never comes.**
 
-The `reference/` folder is the knowledge library: what you (and your agents) have already figured out, so nobody figures it out twice. Over a year this becomes the asset that separates "Graeme googles fast" from "Graeme's system already knows."
+The `reference/` folder is the knowledge library: what you (and your agents) have already figured out, so nobody figures it out twice. Over a year this becomes the asset that separates "you google fast" from "your system already knows."
 
 ## The filing flow, step by step
 
@@ -16,7 +16,7 @@ Say today you looked up the 5.6 model family — Sol, Terra, Luna — and their 
 6. **Link it forward.** If the fact changes an assumption on a roadmap or intake item — Luna's price halves the cost estimate for E3 — add a dated line to that item's `## Log`. This step is what makes research surface in Friday's rollup (full trace in docs/03).
 7. **Tag the worklog:** `[E3][ref] Priced 5.6 family — Luna ≈ half assumed cost. Filed reference/model-pricing.md`.
 
-Steps 3–7 take under five minutes by hand. **When an agent did the research, they take zero minutes** — end the session with "file this per the repo rules" and CLAUDE.md handles the rest. Over time, agents do most of the filing; you do the curating.
+Steps 3–7 take under five minutes by hand. **When an agent did the research, they take zero minutes** — end the session with the canned prompt in `prompts/file-research.md` (or just "file this per the repo rules") and CLAUDE.md handles the rest. Over time, agents do most of the filing; you do the curating.
 
 ## Reading it back (the other half of the loop)
 

@@ -8,9 +8,9 @@
 | ID | Request | From | Score | Status |
 |---|---|---|---|---|
 | U1 | CS knowledge assistant | CS manager | 84 | → became **E1** (2026-06-24) |
-| U2 | Regulatory drafting support | Anna, Reg. Affairs | 76 | → became **E3** (2026-06-30) |
+| U2 | Regulatory drafting support | Reg. Affairs lead | 76 | → became **E3** (2026-06-30) |
 | U3 | Meeting-minutes automation for exec assistants | EA team | 58 | hold — Copilot native recap may cover it; reassess after wave 1 (E2) |
-| U4 | French-language support for the CS assistant | Anna, via CS | 61 | hold — scoped 2026-07-09; feasibility rises when P1 eval framework handles bilingual corpora |
+| U4 | French-language support for the CS assistant | Reg. Affairs lead, via CS | 61 | hold — scoped 2026-07-09; feasibility rises when P1 eval framework handles bilingual corpora |
 
 ## Scoring notes
 

@@ -2,7 +2,7 @@
 
 - **Status:** Next · ◐ validating
 - **Outcome:** first-draft filings and responses generated from source documents, with a full audit trail reviewers can trust.
-- **Team:** Regulatory Affairs (contact: Anna)
+- **Team:** Regulatory Affairs (contact: team lead)
 - **Built on:** P1 (document intelligence core), P4 (evaluation & audit framework)
 - **Measure:** drafting hours per filing, before/after; reviewer acceptance rate of first drafts.
 

@@ -25,7 +25,7 @@ Voice dictation is a fine input method if typing is the friction — dictate the
 - 11:15 [P2] Decided: review checks run in CI, not as a manual gate. Rationale in items/P2 log
 - 14:05 [E3][ref] Priced the 5.6 family — Luna ≈ half our cost assumption for compliance drafting.
         Filed reference/model-pricing.md, updated E3 assumptions
-- 16:30 [meta] Anna (Regulatory) asked about French-language support — added to intake as U4
+- 16:30 [meta] Reg. Affairs lead asked about French-language support — added to intake as U4
 ```
 
 Rules of thumb:
