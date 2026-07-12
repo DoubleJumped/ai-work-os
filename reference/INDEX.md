@@ -8,4 +8,6 @@
 - [model-pricing.md](model-pricing.md) — verified per-MTok API pricing: OpenAI 5.6 family, Claude, Grok, cache mechanics · check-monthly
 - [enterprise-ai-lanes.md](enterprise-ai-lanes.md) — OpenAI vs Anthropic vs Microsoft as org-wide lanes: seats, privacy, enablement, recommendation · check-monthly
 - [canadian-data-requirements.md](canadian-data-requirements.md) — SK FOIP, PIA requirements, vendor Canada-residency scorecard, procurement checklist · check-quarterly
+- [alberta-velocity-program.md](alberta-velocity-program.md) — Alberta's AI program: timeline, Academy, harness contents, clonable repos, business-case numbers · check-quarterly
+- [canadian-ai-adopters.md](canadian-ai-adopters.md) — citable Canadian coding-agent precedents (Shopify, Wealthsimple, CIBC, TD…) + Saskatchewan white space · check-quarterly
 - [_template.md](_template.md) — starter for new reference files (not knowledge)
