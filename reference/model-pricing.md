@@ -22,8 +22,8 @@ All prices USD per MTok. Verified against official vendor pages on the stamp dat
 | GPT-5.4 nano | $0.20 | $0.02 | $1.25 | 50% off | (unverified) | cheapest OpenAI model |
 | gpt-5.3-codex | $1.75 | — | $14.00 | 50% off | (unverified) | coding-specialized |
 
-(as of 2026-07-09, source: https://developers.openai.com/api/docs/pricing and https://developers.openai.com/api/docs/models)
-Cache mechanics: automatic prefix caching, no write charge; cached input ≈ 10% of input rate. Batch = flat 50% off (batch cells above derived from that rule). Rows marked (unverified) lacked an official context-window listing at check time.
+(as of 2026-07-14, source: https://developers.openai.com/api/docs/pricing and https://developers.openai.com/api/docs/models)
+Cache mechanics: pre-5.6 models keep automatic prefix caching with no write charge; **GPT-5.6 family uses explicit cache breakpoints — writes bill at 1.25× input, reads keep the 90% discount, 30-min minimum cache life** (as of 2026-07-14, source: https://openai.com/index/gpt-5-6/). Long-context surcharge: 2× input/output past 272K tokens (Luna 200K). Batch = flat 50% off (batch cells above derived from that rule). Rows marked (unverified) lacked an official context-window listing at check time.
 
 ## Anthropic — Claude models
 
