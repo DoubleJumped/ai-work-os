@@ -78,7 +78,8 @@ The requirement — **data at rest in Canada, inference in the US acceptable** �
 
 - **"ChatGPT Work" is not a product.** The lineup is Free/Go/Plus/Pro (individual) and **Business / Enterprise / Edu** (workspace); "OpenAI for Business" is umbrella marketing. ChatGPT Team was renamed **ChatGPT Business** in Aug 2025. (as of 2026-07-14, sources: https://chatgpt.com/business/business-plan/, https://help.openai.com/en/articles/8792828)
 - ChatGPT Business: **$20/seat/mo annual ($25 monthly), min 2 seats**, self-serve; includes GPTs, Projects, Company Knowledge, ChatGPT Agent, Deep Research, and Codex. Since 2026-04-02 there is also a cheaper **Codex-only seat type**. (as of 2026-07-14, sources: https://help.openai.com/en/articles/8792828, https://nerova.ai/costs-roi/chatgpt-business-pricing-explained-2026)
-- ChatGPT Enterprise: **no list price; reported ~$60/seat/mo (range $45–75), ~150-seat annual-prepaid contract floor ≈ $108k/yr minimum — widely reported but unofficial**, and OpenAI also offers credits-based "flexible pricing" for Enterprise/Edu/Business, which is the negotiation lever. (as of 2026-07-14, sources: https://www.beam.cloud/blog/chatgpt-enterprise-pricing, https://help.openai.com/en/articles/11487671)
+- ChatGPT Enterprise: **no list price; reported ~$60/seat/mo (range $45–75), ~150-seat annual-prepaid contract floor ≈ $108k/yr minimum — widely reported but unofficial**. OpenAI also offers credits-based "flexible pricing" for Enterprise/Edu/Business. (as of 2026-07-14, sources: https://www.beam.cloud/blog/chatgpt-enterprise-pricing, https://help.openai.com/en/articles/11487671)
+- **Negotiability of the 150-seat floor: no firsthand account found of anyone getting below it.** 2026 licensing-negotiation guides consistently call the 150-seat minimum + annual contract "non-negotiable"; the negotiable levers are per-seat price ($45–75), multi-year term discounts (5–15%), and activation-based true-downs on large deals. The only Reddit datapoint that surfaces (secondhand) confirms $60/seat × 150 × 12mo. Counter-signals are thin (one TechTarget piece disputes a hard minimum; flexible pricing exists officially). **Plan on the ~$108K/yr floor; treat sub-150 as a sales-call question, not an assumption.** (as of 2026-07-14, sources: https://atonementlicensing.com/blog/chatgpt-enterprise-pricing-2026/, https://www.gosearch.ai/faqs/chatgpt-enterprise-pricing-explained-cost-tiers-hidden-fees-gosearch-comparison/, https://bestremotetools.com/chatgpt-enterprise-minimum-seats-and-contract-length-require/)
 
 ### 3.2 Data residency (ChatGPT product)
 
@@ -168,7 +169,7 @@ How to get there:
 
 - **Anthropic Canada region GA** on Bedrock/Vertex/Foundry → Cowork + Team/Enterprise become fully compliant; retire the Bedrock-only constraint. (claude.com/regional-compliance)
 - **Cowork cloud storage-region commitment** or a Foundry/Bedrock backend for Cowork (currently "not planned") → re-open Path A step 3.
-- **OpenAI Enterprise flexible pricing confirmed below ~150 seats** → Path B entry cost drops materially.
+- **OpenAI Enterprise flexible pricing confirmed below ~150 seats** → Path B entry cost drops materially. (As of 2026-07-14 no firsthand account of a sub-150 deal exists — see §3.1; don't plan on it.)
 - **Claude in Foundry canadaeast confirmed** → cheapest-friction coding lane on either path.
 - Sonnet 5 intro pricing ends 2026-08-31; M365 Copilot Business promo ends 2026-09-30.
 
