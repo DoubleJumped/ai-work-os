@@ -6,7 +6,7 @@ Legal approved the policy corpus this week ([E1 log](../roadmap/items/E1-custome
 **Next step:** ingestion Monday; baseline task-timing captured before the assistant goes live so the before/after is clean.
 
 ### [E3] Regulatory & compliance drafting — cost assumption cut in half
-Priced the 5.6 model family: Luna meets our drafting quality bar at roughly half the per-document cost in the current E3 estimate ([details](../reference/model-pricing.md)).
+Priced the 5.6 model family: Luna meets our drafting quality bar at roughly half the per-document cost in the current E3 estimate ([details](https://github.com/DoubleJumped/ai-platform-research/blob/main/reference/model-pricing.md)).
 **Why it matters:** E3's business case just got materially stronger.
 **Next step:** validate Luna on 3 real (redacted) filings; propose moving E3 up at the monthly roadmap refresh.
 
@@ -19,7 +19,7 @@ Decided automated review checks run in the build pipeline rather than as a manua
 - New: U4 — French-language support for the CS assistant (via the Reg. Affairs lead) — scored 61, hold until the eval framework handles bilingual corpora.
 
 ### Learned this week
-- [model-pricing.md](../reference/model-pricing.md) — 5.6 family pricing filed; [model-families.md](../reference/model-families.md) — Sol/Terra/Luna definitions.
+- [model-pricing.md](https://github.com/DoubleJumped/ai-platform-research/blob/main/reference/model-pricing.md) — 5.6 family pricing filed; [model-families.md](https://github.com/DoubleJumped/ai-platform-research/blob/main/reference/model-families.md) — Sol/Terra/Luna definitions.
 
 ### Flags
 - None this week.

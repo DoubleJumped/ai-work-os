@@ -9,4 +9,4 @@
 ## Log
 
 - 2026-06-30 — created. Generalizes the per-corpus eval decision from P1 (docs 05) into a standing framework: scoring, thresholds, and a reviewable trail for every output.
-- 2026-07-09 — [ref] E3's Luna re-costing (../../reference/model-pricing.md) makes the drafting case stronger, which raises the pressure to land P4 — it is the sole blocker on E3.
+- 2026-07-09 — [ref] E3's Luna re-costing ([model-pricing.md](https://github.com/DoubleJumped/ai-platform-research/blob/main/reference/model-pricing.md) in the research repo) makes the drafting case stronger, which raises the pressure to land P4 — it is the sole blocker on E3.

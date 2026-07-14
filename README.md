@@ -2,7 +2,7 @@
 
 A file-based operating system for an AI Specialist role: capture what you do daily, file what you learn permanently, link everything to a living roadmap, and let agents draft the reporting. Everything is plain markdown so both you and AI agents can read, write, and reason over it.
 
-**This copy is the home template.** The worklogs, roadmap, and rollups are sample content showing the system in use; `reference/` carries real, stamped research (general-knowledge only — nothing employer-confidential). The work instance lives in OneDrive/SharePoint at work and never touches personal GitHub — see [docs/07-work-setup.md](docs/07-work-setup.md).
+**This copy is the home template.** The worklogs, roadmap, and rollups are sample content showing the system in use; `reference/` holds only the file template here — the real research corpus this template incubated was split out to [ai-platform-research](https://github.com/DoubleJumped/ai-platform-research) (2026-07-14) so the reusable system and the living research can evolve separately. The work instance lives in OneDrive/SharePoint at work and never touches personal GitHub — see [docs/07-work-setup.md](docs/07-work-setup.md).
 
 ## The loop
 
