@@ -209,6 +209,7 @@
   .callout.q{border-left-color:var(--claude)}
   .callout .attr{display:block;margin-top:10px;font-size:12px;color:var(--ink3)}
   .callout em{color:var(--ink);font-style:normal;font-weight:600}
+  .callout ul{margin:10px 0 0 18px;display:grid;gap:7px;font-size:13px}
 
   /* ---------- tables ---------- */
   .tbl{width:100%;border-collapse:collapse;margin-top:26px;font-size:14px}
@@ -561,10 +562,11 @@
   <div class="wrap">
     <div class="eyebrow">The reasoning dial · Codex CLI / API / ChatGPT (not Copilot)</div>
     <h2>High is the elbow. Max is a luxury.</h2>
-    <p class="lede">Six effort levels (<span class="num">none → low → medium → high → xhigh → max</span>) plus <b>Ultra</b>, a parallel multi-agent mode. Theo's published curve from ~$200k of Sol usage: quality climbs steeply to <b>high</b>, then crawls while cost keeps doubling.</p>
-    <div class="chart-box">
+    <p class="lede">Six effort levels (<span class="num">none → low → medium → high → xhigh → max</span>) plus <b>Ultra</b>, a parallel multi-agent mode. Quality climbs steeply to <b>high</b>, then crawls while cost keeps doubling.</p>
+    <div class="split" style="margin-top:22px">
+    <div class="chart-box" style="margin-top:0">
       <h4>Sol: task score vs cost per task, by effort level</h4>
-      <div class="sub">Theo (t3.gg) cost/quality points · secondhand via BigGo, 2026-07-13 · directionally matches OpenAI's own "test one level lower" guidance</div>
+      <div class="sub">Theo (t3.gg), ~$200k of Sol usage · via BigGo, 2026-07-13</div>
       <svg viewBox="0 0 880 452" role="img" aria-label="Line chart of score versus cost for Sol effort levels. Low 45 percent at 1 dollar, medium 61 percent at 1.86, high 69 percent at 3.47, extra high 71 percent at 4.70, max 73 percent at 8.39 dollars per task.">
         <line class="gline" x1="80" y1="384" x2="840" y2="384"/>
         <line class="gline" x1="80" y1="291" x2="840" y2="291"/>
@@ -594,7 +596,19 @@
         <text class="note" x="583" y="180" text-anchor="middle">high → max: +4 pts for 2.4× the cost</text>
       </svg>
     </div>
-    <p class="foot">OpenAI's own rules: default is medium; raise to high/xhigh "only when evals show a meaningful gain"; "do not recommend max globally"; when migrating from 5.5, test one level <b style="color:var(--ink)">lower</b> first. 5.6 holds quality with fewer tokens. Practitioners prefer xhigh over Ultra for steering (fewer subagents); Ultra "exhausts weekly quotas in hours."</p>
+    <div class="callout">
+      <em>The rules:</em>
+      <ul>
+        <li>Default is <em>medium</em>.</li>
+        <li>Raise to high/xhigh "only when evals show a meaningful gain."</li>
+        <li>"Do not recommend max globally."</li>
+        <li>Migrating from 5.5? Test one level <em>lower</em> first.</li>
+        <li>Prefer xhigh over Ultra: fewer subagents, easier steering.</li>
+        <li>Ultra "exhausts weekly quotas in hours."</li>
+      </ul>
+      <span class="attr">OpenAI prompt-guidance docs, 2026-07 · practitioner reports (dev forum, Theo)</span>
+    </div>
+    </div>
   </div>
   <div class="pgnum"></div>
 </section>
