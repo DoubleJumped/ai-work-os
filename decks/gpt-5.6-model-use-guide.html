@@ -27,13 +27,26 @@
     height:100dvh; overflow-y:auto; scroll-snap-type:y mandatory;
   }
   .slide{
-    min-height:100dvh; scroll-snap-align:start; position:relative;
+    min-height:100dvh; scroll-snap-align:start; position:relative; overflow:hidden;
     display:flex; flex-direction:column; justify-content:center;
     padding:clamp(24px,5vw,72px);
     background:linear-gradient(160deg,var(--bg0) 0%,var(--bg1) 55%,#0b1630 100%);
     border-bottom:1px solid rgba(255,255,255,.04);
   }
-  .wrap{width:100%;max-width:1120px;margin:0 auto}
+  .wrap{width:100%;max-width:1120px;margin:0 auto;position:relative;z-index:1}
+
+  /* ---------- recurring model motifs ---------- */
+  .bg-flare{
+    position:absolute;right:-10vmin;top:-16vmin;width:60vmin;height:60vmin;border-radius:50%;
+    pointer-events:none;
+    background:radial-gradient(circle,rgba(255,207,158,.26) 0%,rgba(255,106,44,.14) 34%,transparent 64%);
+  }
+  .bg-moon{
+    position:absolute;left:-12vmin;bottom:-18vmin;width:48vmin;height:48vmin;border-radius:50%;
+    pointer-events:none;
+    background:radial-gradient(circle at 72% 26%, rgba(215,222,238,.20) 0%, rgba(120,128,148,.11) 38%, rgba(16,24,42,.16) 66%, transparent 80%);
+    box-shadow:0 0 60px rgba(163,190,250,.07);
+  }
 
   /* ---------- type ---------- */
   .eyebrow{
@@ -66,8 +79,7 @@
   .chip.plain{color:var(--ink2)} .chip.plain i{background:var(--ink3)}
 
   /* ---------- cover ---------- */
-  #cover{overflow:hidden;background:radial-gradient(120% 90% at 70% 20%, #0d1e3f 0%, var(--bg0) 60%)}
-  .stars,.stars2{position:absolute;inset:0;pointer-events:none}
+  #cover{background:radial-gradient(120% 90% at 70% 20%, #0d1e3f 0%, var(--bg0) 60%)}
   .milky{
     position:absolute;left:-20%;top:-30%;width:80%;height:160%;
     transform:rotate(24deg);pointer-events:none;
@@ -150,7 +162,7 @@
   }
   .bell.terra-skip p{max-width:70ch}
 
-  /* ---------- family cards ---------- */
+  /* ---------- cards ---------- */
   .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:30px}
   .card{
     border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--panel);
@@ -160,12 +172,18 @@
   .card.sol::before{background:linear-gradient(90deg,var(--flare0),var(--flare1))}
   .card.terra::before{background:linear-gradient(90deg,var(--terra),#a8d590)}
   .card.luna::before{background:linear-gradient(90deg,#8b93a5,var(--luna-hi))}
+  .card.mixed::before{background:linear-gradient(90deg,var(--luna-hi),var(--flare1))}
   .card .role{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:650}
   .card h3{font-size:26px;letter-spacing:-.02em;margin:6px 0 2px}
-  .card .epithet{font-size:14px;color:var(--ink2);font-style:italic;margin-bottom:16px}
+  .card h3.small{font-size:20px;line-height:1.25;margin-bottom:12px}
+  .card .epithet{font-size:13.5px;color:var(--ink2);margin-bottom:16px}
   .stat-row{display:flex;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:9px 0;font-size:13.5px}
   .stat-row span{color:var(--ink3)} .stat-row b{font-weight:650;font-variant-numeric:tabular-nums}
   .card .verdict{margin-top:14px;font-size:13px;line-height:1.5;color:var(--ink2)}
+  .card ol{margin:0 0 0 18px;font-size:13.5px;color:var(--ink2);line-height:1.65}
+  .card ol li{margin-bottom:8px}
+  .card ol b{color:var(--ink)}
+  .card .basis{margin-top:14px;font-size:12px;color:var(--ink3);line-height:1.55;border-top:1px solid var(--line);padding-top:12px}
 
   /* ---------- charts ---------- */
   .chart-box{margin-top:26px;border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:22px 22px 14px}
@@ -235,7 +253,7 @@
   #dots a{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);display:block}
   #dots a.on{background:#fff}
   #dots a:focus-visible{outline:2px solid var(--luna-hi);outline-offset:3px}
-  .pgnum{position:absolute;bottom:20px;right:26px;font-size:11px;color:var(--ink3);letter-spacing:.1em}
+  .pgnum{position:absolute;bottom:20px;right:26px;font-size:11px;color:var(--ink3);letter-spacing:.1em;z-index:1}
   @media (max-width:700px){#dots{display:none}}
   @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   @media print{
@@ -262,10 +280,10 @@
   <div class="cover-copy">
     <div class="eyebrow">Model selection guide · dev work</div>
     <h1>Sol, Terra &amp; Luna:<br>what to use when.</h1>
-    <p class="lede">The sun for the hard problems. The moon for the small ones. What the data — and the people burning real tokens — say about the middle.</p>
+    <p class="lede">A reference for picking the model and reasoning level for dev work. Built on cost-per-task data, official guidance, and field reports.</p>
     <div class="cover-meta">Compiled 2026-07-14 · Artificial Analysis · OpenAI docs · GitHub Copilot docs · Theo (t3.gg) · Simon Willison · field reports</div>
   </div>
-  <div class="pgnum">01 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
 <!-- 2 · TLDR -->
@@ -273,30 +291,74 @@
   <div class="wrap">
     <div class="eyebrow"><b>TL;DR</b> · the whole deck in one slide</div>
     <h2>Run a barbell, not a ladder.</h2>
-    <p class="lede">Two models cover almost everything. Route small, well-defined work to <b>Luna</b>; route hard, long, or ambiguous work to <b>Sol</b>. Where you have a reasoning dial (Codex CLI / API), default to <b>Sol&nbsp;medium</b> and escalate to <b>Sol&nbsp;high</b> for anything difficult or longer than ~10 minutes.</p>
+    <p class="lede">Two models cover almost everything. Use <b>Luna</b> for small, well-defined work. Use <b>Sol</b> for hard, long, or ambiguous work. Where you have a reasoning dial (Codex CLI / API), default to <b>Sol&nbsp;medium</b>. Raise to <b>Sol&nbsp;high</b> for anything difficult or longer than ~10 minutes.</p>
     <div class="barbell">
       <div class="bell luna">
         <span class="chip luna"><i></i>Luna</span>
         <h3 style="margin-top:12px">The small stuff</h3>
-        <p>Spot edits, lookups, tests for known code, bulk/batch jobs. ~4× the intelligence-per-dollar of Sol.</p>
+        <p>Spot edits, lookups, tests for known code, bulk and batch jobs. About 4x the intelligence-per-dollar of Sol.</p>
       </div>
       <div class="bar-link" aria-hidden="true"></div>
       <div class="bell sol">
         <span class="chip sol"><i></i>Sol</span>
         <h3 style="margin-top:12px">The hard stuff</h3>
-        <p>Debugging, refactors, long agentic runs. 59/60ths of Claude Fable&nbsp;5's measured intelligence at ~⅓ the cost per task.</p>
+        <p>Debugging, refactors, long agentic runs. Intelligence Index 59 vs Claude Fable 5's 60, at about a third of the cost per task.</p>
       </div>
       <div class="bell terra-skip">
         <span class="chip terra"><i></i>Terra</span>
-        <p><b style="color:var(--ink)">Skip by default.</b> Artificial Analysis finds every Terra configuration matched or beaten by some Sol or Luna configuration on the intelligence-vs-cost frontier. Its honest niche: one-model simplicity, and plans where Sol isn't available.</p>
+        <p><b style="color:var(--ink)">Skip by default.</b> Artificial Analysis finds every Terra configuration matched or beaten by some Sol or Luna configuration on the intelligence-vs-cost frontier. Terra's honest niche: one-model simplicity, and plans where Sol isn't available.</p>
       </div>
     </div>
-    <p class="foot">Max/Ultra are break-glass settings, not defaults. Plan with your highest-judgment model, implement with Sol — and always give 5.6 explicit stop conditions (slide 10).</p>
+    <p class="foot">Max and Ultra are break-glass settings, not defaults. Plan with your highest-judgment model, implement with Sol. Always give 5.6 explicit stop conditions (slide 11).</p>
   </div>
-  <div class="pgnum">02 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 3 · FAMILY -->
+<!-- 3 · QUICK START -->
+<section class="slide">
+  <div class="bg-flare"></div>
+  <div class="bg-moon"></div>
+  <div class="wrap">
+    <div class="eyebrow">Quick start · pick a pattern and go</div>
+    <h2>Three working setups.</h2>
+    <p class="lede">You don't need the full matrix to start. Pick the pattern that matches how you work today.</p>
+    <div class="cards">
+      <div class="card sol">
+        <div class="role">Pattern 1 · simplest</div>
+        <h3 class="small">Daily-drive Sol medium</h3>
+        <ol>
+          <li>Set <b>Sol medium</b> for everything.</li>
+          <li>Raise to <b>high</b> when a task is hard or runs longer than ~10 minutes.</li>
+          <li>Drop back to medium when it's done.</li>
+        </ol>
+        <div class="basis">One model, one setting, no decisions. Medium is OpenAI's default level and the most-cited daily driver in field reports. Costs roughly $1.86 per task on Theo's curve.</div>
+      </div>
+      <div class="card mixed">
+        <div class="role">Pattern 2 · experienced</div>
+        <h3 class="small">Plan on Sol high, work on Luna xhigh</h3>
+        <ol>
+          <li>Plan and decompose with <b>Sol high</b> (xhigh for architecture).</li>
+          <li>Hand each bounded task to a <b>Luna xhigh</b> subagent.</li>
+          <li>Review every diff yourself before merging.</li>
+        </ol>
+        <div class="basis">Raschka: "Luna with extra-high effort may be better and cheaper than Sol with medium effort." Theo: Luna belongs "orchestrated by a smarter agent," not driven directly.</div>
+      </div>
+      <div class="card luna">
+        <div class="role">Pattern 3 · Copilot only</div>
+        <h3 class="small">No dial: Luna small, Sol hard</h3>
+        <ol>
+          <li><b>Luna</b> for quick questions, small edits, lookups.</li>
+          <li><b>Sol</b> for refactors, debugging, agent sessions.</li>
+          <li><b>Terra</b> only when Sol isn't on your plan.</li>
+        </ol>
+        <div class="basis">Copilot hides the effort dial, so the model picker is the whole decision. Details on slide 10.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pgnum"></div>
+</section>
+
+<!-- 4 · FAMILY -->
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">The family · released 2026-07-09</div>
@@ -306,45 +368,46 @@
       <div class="card sol">
         <div class="role">Flagship</div>
         <h3>Sol</h3>
-        <div class="epithet">the value flagship</div>
+        <div class="epithet">Use for hard, long, and agentic work.</div>
         <div class="stat-row"><span>API price in / out</span><b class="num">$5.00 / $30.00</b></div>
         <div class="stat-row"><span>Intelligence Index</span><b class="num">59</b></div>
         <div class="stat-row"><span>Coding Agent Index</span><b class="num">80 · SOTA #1</b></div>
         <div class="stat-row"><span>Cost per task (AA)</span><b class="num">$1.04</b></div>
-        <div class="verdict">"Highest reasoning ceiling… demanding, long-running agentic work." Least verbose of the three — 70M tokens on the same eval Luna needs 130M for.</div>
+        <div class="verdict">"Highest reasoning ceiling… demanding, long-running agentic work." Least verbose of the three: 70M tokens on the eval suite Luna needs 130M for.</div>
       </div>
       <div class="card terra">
         <div class="role">Balanced</div>
         <h3>Terra</h3>
-        <div class="epithet">the squeezed middle</div>
+        <div class="epithet">Use when Sol isn't available.</div>
         <div class="stat-row"><span>API price in / out</span><b class="num">$2.50 / $15.00</b></div>
         <div class="stat-row"><span>Intelligence Index</span><b class="num">55</b></div>
         <div class="stat-row"><span>Coding Agent Index</span><b class="num">77.4</b></div>
         <div class="stat-row"><span>Cost per task (AA)</span><b class="num">$0.55</b></div>
-        <div class="verdict">"A balanced model for everyday work" — GPT-5.5-class at half the list price. But both public token-burn horror stories were Terra sessions.</div>
+        <div class="verdict">"A balanced model for everyday work." GPT-5.5-class at half the list price. Both public token-burn reports were Terra sessions.</div>
       </div>
       <div class="card luna">
         <div class="role">Efficient</div>
         <h3>Luna</h3>
-        <div class="epithet">the volume engine</div>
+        <div class="epithet">Use for small tasks and bulk work.</div>
         <div class="stat-row"><span>API price in / out</span><b class="num">$1.00 / $6.00</b></div>
         <div class="stat-row"><span>Intelligence Index</span><b class="num">51</b></div>
         <div class="stat-row"><span>Coding Agent Index</span><b class="num">74.6</b></div>
         <div class="stat-row"><span>Cost per task (AA)</span><b class="num">$0.21</b></div>
-        <div class="verdict">"Fastest and most affordable" — 216 tok/s. One hard limit: long-context recall collapses past 256K (41.3% vs Sol's 91.5%).</div>
+        <div class="verdict">"Fastest and most affordable." 216 tok/s. One hard limit: long-context recall collapses past 256K (41.3% vs Sol's 91.5%).</div>
       </div>
     </div>
-    <p class="foot">Accent colors here follow the launch artwork's metaphor (sun flare / earth / moon) — OpenAI publishes no per-model brand colors. Sources: openai.com/index/gpt-5-6, developers.openai.com, artificialanalysis.ai (2026-07-09).</p>
+    <p class="foot">Accent colors follow the launch artwork's metaphor (sun flare / earth / moon). OpenAI publishes no per-model brand colors. Sources: openai.com/index/gpt-5-6, developers.openai.com, artificialanalysis.ai (2026-07-09).</p>
   </div>
-  <div class="pgnum">03 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 4 · COST PER TASK -->
+<!-- 5 · COST PER TASK -->
 <section class="slide">
+  <div class="bg-moon"></div>
   <div class="wrap">
-    <div class="eyebrow">Economics · 01</div>
+    <div class="eyebrow">Economics · cost per task</div>
     <h2>Cost per unit of work, not per token.</h2>
-    <p class="lede">Artificial Analysis prices a full task — prompt, reasoning tokens, answer — across its Intelligence Index suite. This is the number that matters when your Copilot bill is token-metered.</p>
+    <p class="lede">Artificial Analysis prices a full task (prompt, reasoning tokens, answer) across its Intelligence Index suite. This is the number that matters when your Copilot bill is token-metered.</p>
     <div class="chart-box">
       <h4>Cost per task, each model at max reasoning (USD)</h4>
       <div class="sub">Artificial Analysis Intelligence Index suite · 2026-07-09</div>
@@ -358,29 +421,29 @@
         <text class="axis" x="568" y="274" text-anchor="middle">$2</text>
         <text class="axis" x="777" y="274" text-anchor="middle">$3</text>
         <text class="nlab" x="138" y="46" text-anchor="end">Luna</text>
-        <rect class="bar" x="150" y="32" width="44" height="20" rx="4" fill="#6f8fe0"><title>Luna — $0.21 per task</title></rect>
+        <rect class="bar" x="150" y="32" width="44" height="20" rx="4" fill="#6f8fe0"><title>Luna: $0.21 per task</title></rect>
         <text class="dlab" x="204" y="46">$0.21</text>
         <text class="nlab" x="138" y="106" text-anchor="end">Terra</text>
-        <rect class="bar" x="150" y="92" width="115" height="20" rx="4" fill="#4a9d6e"><title>Terra — $0.55 per task</title></rect>
+        <rect class="bar" x="150" y="92" width="115" height="20" rx="4" fill="#4a9d6e"><title>Terra: $0.55 per task</title></rect>
         <text class="dlab" x="275" y="106">$0.55</text>
         <text class="nlab" x="138" y="166" text-anchor="end">Sol</text>
-        <rect class="bar" x="150" y="152" width="217" height="20" rx="4" fill="#cc7226"><title>Sol — $1.04 per task</title></rect>
+        <rect class="bar" x="150" y="152" width="217" height="20" rx="4" fill="#cc7226"><title>Sol: $1.04 per task</title></rect>
         <text class="dlab" x="377" y="166">$1.04</text>
         <text class="nlab" x="138" y="226" text-anchor="end">Claude Fable 5</text>
-        <rect class="bar" x="150" y="212" width="652" height="20" rx="4" fill="#c9679e" opacity="0.55" stroke="#c9679e" stroke-dasharray="5 4"><title>Claude Fable 5 — about $3.12 per task, derived from AA's statement that Sol costs about one third as much</title></rect>
+        <rect class="bar" x="150" y="212" width="652" height="20" rx="4" fill="#c9679e" opacity="0.55" stroke="#c9679e" stroke-dasharray="5 4"><title>Claude Fable 5: about $3.12 per task, derived from AA's statement that Sol costs about one third as much</title></rect>
         <text class="dlab" x="812" y="226">~$3.12*</text>
       </svg>
       <div class="legend"><span><i style="background:var(--luna)"></i>Luna 243 intelligence-pts/$</span><span><i style="background:var(--terra)"></i>Terra 100 pts/$</span><span><i style="background:var(--sol)"></i>Sol 57 pts/$</span><span><i style="background:var(--claude)"></i>Fable ~19 pts/$*</span></div>
     </div>
-    <p class="foot">*Fable 5 figure derived from AA's statement that Sol's per-task cost is ~⅓ of Fable 5's — estimate, not AA-published. Trilogy's independent estimate agrees on the ranking ("Luna ~24 benchmark points per API dollar vs Fable 3.2"). Source: artificialanalysis.ai/articles/gpt-5-6-has-landed.</p>
+    <p class="foot">*The Fable 5 figure is derived from AA's statement that Sol's per-task cost is about one third of Fable 5's. It is an estimate, not an AA-published number. Trilogy's independent estimate agrees on the ranking ("Luna ~24 benchmark points per API dollar vs Fable 3.2"). Source: artificialanalysis.ai/articles/gpt-5-6-has-landed.</p>
   </div>
-  <div class="pgnum">04 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 5 · PARETO -->
+<!-- 6 · PARETO -->
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow">Economics · 02</div>
+    <div class="eyebrow">Economics · the frontier</div>
     <h2>The middle gets squeezed.</h2>
     <div class="split">
       <div class="chart-box" style="margin-top:0">
@@ -400,13 +463,13 @@
           <text class="axis" x="514" y="428" text-anchor="middle">$2</text>
           <text class="axis" x="731" y="428" text-anchor="middle">$3</text>
           <text class="axis" x="460" y="458" text-anchor="middle">cost per task →</text>
-          <circle cx="126" cy="277" r="8" fill="#6f8fe0" stroke="#0a1428" stroke-width="2"><title>Luna max — Intelligence 51 at $0.21 per task</title></circle>
+          <circle cx="126" cy="277" r="8" fill="#6f8fe0" stroke="#0a1428" stroke-width="2"><title>Luna max: Intelligence 51 at $0.21 per task</title></circle>
           <text class="nlab" x="126" y="308" text-anchor="middle">Luna</text>
-          <circle cx="199" cy="186" r="8" fill="#4a9d6e" stroke="#0a1428" stroke-width="2"><title>Terra max — Intelligence 55 at $0.55 per task</title></circle>
+          <circle cx="199" cy="186" r="8" fill="#4a9d6e" stroke="#0a1428" stroke-width="2"><title>Terra max: Intelligence 55 at $0.55 per task</title></circle>
           <text class="nlab" x="199" y="160" text-anchor="middle">Terra</text>
-          <circle cx="306" cy="94" r="8" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>Sol max — Intelligence 59 at $1.04 per task</title></circle>
+          <circle cx="306" cy="94" r="8" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>Sol max: Intelligence 59 at $1.04 per task</title></circle>
           <text class="nlab" x="306" y="70" text-anchor="middle">Sol</text>
-          <circle cx="757" cy="71" r="8" fill="#c9679e" stroke="#0a1428" stroke-width="2" opacity="0.8"><title>Claude Fable 5 — Intelligence 60 at approximately $3.12 per task (derived)</title></circle>
+          <circle cx="757" cy="71" r="8" fill="#c9679e" stroke="#0a1428" stroke-width="2" opacity="0.8"><title>Claude Fable 5: Intelligence 60 at approximately $3.12 per task (derived)</title></circle>
           <text class="nlab" x="757" y="47" text-anchor="middle">Fable 5*</text>
           <text class="note" x="306" y="128" text-anchor="middle">within 1 pt of the leader,</text>
           <text class="note" x="306" y="143" text-anchor="middle">~⅓ the cost</text>
@@ -415,24 +478,24 @@
       <div>
         <div class="callout q">
           "Luna and Sol are always on the Pareto frontier ahead of Terra. For any Terra effort level, there is a Luna or Sol effort level that is <em>more intelligent at no extra cost, or as intelligent at lower cost</em>."
-          <span class="attr">Artificial Analysis, comparing the full effort-level curves of all three tiers (their interactive chart; per-effort dollar figures aren't published as data — at max-only, shown left, Terra looks respectable). artificialanalysis.ai, 2026-07</span>
+          <span class="attr">Artificial Analysis, comparing the full effort-level curves of all three tiers (their interactive chart; per-effort dollar figures aren't published as data. At max effort only, shown left, Terra looks respectable). artificialanalysis.ai, 2026-07</span>
         </div>
         <div class="callout" style="margin-top:14px">
-          Same conclusion from the field: Sebastian Raschka — <em>"Luna with extra-high effort may be better and cheaper than Sol with medium effort."</em> Models are train-time compute; effort is test-time compute. Buy whichever is cheaper for the quality you need.
+          Same conclusion from the field. Sebastian Raschka: <em>"Luna with extra-high effort may be better and cheaper than Sol with medium effort."</em> Models are train-time compute; effort is test-time compute. Buy whichever is cheaper for the quality you need.
           <span class="attr">sebastianraschka.com, 2026-07-09</span>
         </div>
       </div>
     </div>
   </div>
-  <div class="pgnum">05 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 6 · VERBOSITY -->
+<!-- 7 · VERBOSITY -->
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow">Economics · 03</div>
+    <div class="eyebrow">Economics · token volume</div>
     <h2>Cheaper per token ≠ fewer tokens.</h2>
-    <p class="lede">The cheaper tiers <b>think out loud more</b>. To finish the same eval suite, Luna emits nearly twice the tokens Sol does. If "minimal tokens" means latency and context budget, Sol wins; if it means dollars, Luna wins. Know which one you're optimizing.</p>
+    <p class="lede">The cheaper tiers <b>think out loud more</b>. To finish the same eval suite, Luna emits nearly twice the tokens Sol does. If "minimal tokens" means latency and context budget, Sol wins. If it means dollars, Luna wins. Know which one you're optimizing.</p>
     <div class="chart-box">
       <h4>Output tokens to complete the full Intelligence Index suite</h4>
       <div class="sub">Artificial Analysis model pages · 2026-07</div>
@@ -444,26 +507,27 @@
         <text class="axis" x="400" y="214" text-anchor="middle">50M</text>
         <text class="axis" x="650" y="214" text-anchor="middle">100M</text>
         <text class="nlab" x="138" y="46" text-anchor="end">Sol</text>
-        <rect class="bar" x="150" y="32" width="350" height="20" rx="4" fill="#cc7226"><title>Sol — 70M output tokens</title></rect>
+        <rect class="bar" x="150" y="32" width="350" height="20" rx="4" fill="#cc7226"><title>Sol: 70M output tokens</title></rect>
         <text class="dlab" x="510" y="46">70M · least verbose</text>
         <text class="nlab" x="138" y="106" text-anchor="end">Terra</text>
-        <rect class="bar" x="150" y="92" width="480" height="20" rx="4" fill="#4a9d6e"><title>Terra — 96M output tokens</title></rect>
+        <rect class="bar" x="150" y="92" width="480" height="20" rx="4" fill="#4a9d6e"><title>Terra: 96M output tokens</title></rect>
         <text class="dlab" x="640" y="106">96M</text>
         <text class="nlab" x="138" y="166" text-anchor="end">Luna</text>
-        <rect class="bar" x="150" y="152" width="650" height="20" rx="4" fill="#6f8fe0"><title>Luna — 130M output tokens</title></rect>
+        <rect class="bar" x="150" y="152" width="650" height="20" rx="4" fill="#6f8fe0"><title>Luna: 130M output tokens</title></rect>
         <text class="dlab" x="810" y="166">130M</text>
       </svg>
     </div>
-    <p class="foot">This is why Terra's list-price discount partly evaporates on long work — and why both public "burned my whole quota" reports were Terra sessions. Related trap: input and output bill at 2× past 272K context (Luna: 200K) — restart sessions instead of growing threads.</p>
+    <p class="foot">This is why Terra's list-price discount partly evaporates on long work, and why both public "burned my whole quota" reports were Terra sessions. Related trap: input and output bill at 2x past 272K context (Luna: 200K). Restart sessions instead of growing threads.</p>
   </div>
-  <div class="pgnum">06 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 7 · EFFORT DIAL -->
+<!-- 8 · EFFORT DIAL -->
 <section class="slide">
+  <div class="bg-flare"></div>
   <div class="wrap">
-    <div class="eyebrow">The reasoning dial · Codex CLI / API / ChatGPT — not Copilot</div>
-    <h2>High is the knee. Max is a luxury.</h2>
+    <div class="eyebrow">The reasoning dial · Codex CLI / API / ChatGPT (not Copilot)</div>
+    <h2>High is the elbow. Max is a luxury.</h2>
     <p class="lede">Six effort levels (<span class="num">none → low → medium → high → xhigh → max</span>) plus <b>Ultra</b>, a parallel multi-agent mode. Theo's published curve from ~$200k of Sol usage: quality climbs steeply to <b>high</b>, then crawls while cost keeps doubling.</p>
     <div class="chart-box">
       <h4>Sol: task score vs cost per task, by effort level</h4>
@@ -484,25 +548,25 @@
         <text class="axis" x="756" y="416" text-anchor="middle">$8</text>
         <text class="axis" x="460" y="444" text-anchor="middle">cost per task →</text>
         <polyline points="164,384 237,236 373,162 477,143 789,124" fill="none" stroke="#cc7226" stroke-width="2"/>
-        <circle cx="164" cy="384" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>low — 45% at $1.00</title></circle>
+        <circle cx="164" cy="384" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>low: 45% at $1.00</title></circle>
         <text class="nlab" x="164" y="360" text-anchor="middle">low</text>
-        <circle cx="237" cy="236" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>medium — 61% at $1.86</title></circle>
+        <circle cx="237" cy="236" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>medium: 61% at $1.86</title></circle>
         <text class="nlab" x="237" y="212" text-anchor="middle">medium</text>
-        <circle cx="373" cy="162" r="9" fill="#cc7226" stroke="#f2f5fb" stroke-width="2"><title>high — 69% at $3.47 — the knee of the curve</title></circle>
-        <text class="nlab" x="373" y="136" text-anchor="middle" fill="#f2f5fb">high ← the knee</text>
-        <circle cx="477" cy="143" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>xhigh — 71% at $4.70</title></circle>
+        <circle cx="373" cy="162" r="9" fill="#cc7226" stroke="#f2f5fb" stroke-width="2"><title>high: 69% at $3.47, the elbow of the curve</title></circle>
+        <text class="nlab" x="373" y="136" text-anchor="middle" fill="#f2f5fb">high ← the elbow</text>
+        <circle cx="477" cy="143" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>xhigh: 71% at $4.70</title></circle>
         <text class="nlab" x="477" y="119" text-anchor="middle">xhigh</text>
-        <circle cx="789" cy="124" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>max — 73% at $8.39</title></circle>
+        <circle cx="789" cy="124" r="7" fill="#cc7226" stroke="#0a1428" stroke-width="2"><title>max: 73% at $8.39</title></circle>
         <text class="nlab" x="789" y="100" text-anchor="middle">max</text>
         <text class="note" x="583" y="180" text-anchor="middle">high → max: +4 pts for 2.4× the cost</text>
       </svg>
     </div>
-    <p class="foot">OpenAI's own rules: default is medium; raise to high/xhigh "only when evals show a meaningful gain"; "do not recommend max globally"; when migrating from 5.5, test one level <b style="color:var(--ink)">lower</b> — 5.6 holds quality with fewer tokens. Practitioners prefer xhigh over Ultra for steering (fewer subagents); Ultra "exhausts weekly quotas in hours."</p>
+    <p class="foot">OpenAI's own rules: default is medium; raise to high/xhigh "only when evals show a meaningful gain"; "do not recommend max globally"; when migrating from 5.5, test one level <b style="color:var(--ink)">lower</b> first. 5.6 holds quality with fewer tokens. Practitioners prefer xhigh over Ultra for steering (fewer subagents); Ultra "exhausts weekly quotas in hours."</p>
   </div>
-  <div class="pgnum">07 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 8 · MATRIX (dial) -->
+<!-- 9 · MATRIX (dial) -->
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">Decision matrix · where you control the dial</div>
@@ -510,28 +574,28 @@
     <table class="tbl">
       <thead><tr><th>Dev task</th><th>Use</th><th>Why</th></tr></thead>
       <tbody>
-        <tr><td>Spot edits · renames · known-error fixes · quick tests</td><td><span class="chip luna"><i></i>Luna high</span> <span class="chip sol"><i></i>Sol low</span></td><td class="why">Luna: ~4× Sol's intelligence-per-dollar. Sol low if latency matters.</td></tr>
+        <tr><td>Spot edits · renames · known-error fixes · quick tests</td><td><span class="chip luna"><i></i>Luna high</span> <span class="chip sol"><i></i>Sol low</span></td><td class="why">Luna: ~4x Sol's intelligence-per-dollar. Sol low if latency matters.</td></tr>
         <tr><td>Everyday features · API integration · routine multi-file</td><td><span class="chip sol"><i></i>Sol medium</span></td><td class="why">OpenAI's default level; the community's most-cited daily driver.</td></tr>
-        <tr><td>Complex debugging · race conditions · big PR review</td><td><span class="chip sol"><i></i>Sol high</span></td><td class="why">Theo's default for anything &gt;10 min — "the only thing in the good quadrant."</td></tr>
+        <tr><td>Complex debugging · race conditions · big PR review</td><td><span class="chip sol"><i></i>Sol high</span></td><td class="why">Theo's default for anything &gt;10 min: "the only thing in the good quadrant."</td></tr>
         <tr><td>Long agentic runs · terminal-heavy · computer use</td><td><span class="chip sol"><i></i>Sol high</span></td><td class="why">Terminal-Bench 88.8% SOTA; week-long 150k-LOC field report, no drift.</td></tr>
         <tr><td>Planning · architecture · scoping</td><td><span class="chip sol"><i></i>Sol xhigh</span> <span class="chip claude"><i></i>or Fable 5</span></td><td class="why">Sol over-builds (56 vs Fable's 90 on Every.to's architecture rubric). Plan high-judgment, hand Sol the plan.</td></tr>
         <tr><td>Repo-wide, SWE-bench-style changes</td><td><span class="chip claude"><i></i>Fable 5 / Opus</span></td><td class="why">Sol's one clear benchmark gap: SWE-Bench Pro 64.6% vs Fable's 80%.</td></tr>
-        <tr><td>One brutally hard, interconnected problem</td><td><span class="chip sol"><i></i>Sol max</span></td><td class="why">Break-glass: +4 pts over high at 2.4× cost. Pay only when correctness ≫ budget.</td></tr>
+        <tr><td>One brutally hard, interconnected problem</td><td><span class="chip sol"><i></i>Sol max</span></td><td class="why">Break-glass: +4 pts over high at 2.4x cost. Pay only when correctness ≫ budget.</td></tr>
         <tr><td>Parallelizable audits / migrations</td><td><span class="chip sol"><i></i>Sol xhigh</span> <span class="chip plain"><i></i>Ultra rarely</span></td><td class="why">xhigh = fewer subagents, easier steering. Ultra only for truly parallel work.</td></tr>
-        <tr><td>Bulk classification · summarization · batch pipelines</td><td><span class="chip luna"><i></i>Luna (batched)</span></td><td class="why">$0.21/task, 216 tok/s. Never for long-context recall (slide 10).</td></tr>
+        <tr><td>Bulk classification · summarization · batch pipelines</td><td><span class="chip luna"><i></i>Luna (batched)</span></td><td class="why">$0.21/task, 216 tok/s. Never for long-context recall (slide 11).</td></tr>
       </tbody>
     </table>
     <p class="foot">Golden rule everywhere: the lowest effort that reliably completes the task. Full evidence trail: reference/5.6-use-guide/ in the ai-work-os repo.</p>
   </div>
-  <div class="pgnum">08 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 9 · COPILOT -->
+<!-- 10 · COPILOT -->
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">GitHub Copilot · where most of us live</div>
     <h2>In Copilot, the model picker is the whole game.</h2>
-    <p class="lede">Copilot exposes <b>no effort dial and no Ultra</b> for GPT-5.6 — just three models, token-billed in AI credits (1 credit = $0.01). Output cost ratio is fixed at <b class="num">Sol : Terra : Luna = 5 : 2.5 : 1</b>.</p>
+    <p class="lede">Copilot exposes <b>no effort dial and no Ultra</b> for GPT-5.6: just three models, token-billed in AI credits (1 credit = $0.01). Output cost ratio is fixed at <b class="num">Sol : Terra : Luna = 5 : 2.5 : 1</b>.</p>
     <div class="split" style="margin-top:26px">
       <table class="tbl" style="margin-top:0">
         <thead><tr><th>Situation</th><th>Pick</th><th>Typical request*</th></tr></thead>
@@ -542,52 +606,52 @@
         </tbody>
       </table>
       <div class="callout">
-        <em>Before any of this works:</em> the GPT-5.6 policy is <em>off by default</em> for Business/Enterprise — an admin must enable it. Sol needs Pro+/Business/Enterprise (not base Pro). Credits pool across the whole org, so a few Sol-heavy devs are absorbed by lighter users — budget the pool, not the seat. Inline completions stay free.
+        <em>Before any of this works:</em> the GPT-5.6 policy is <em>off by default</em> for Business/Enterprise. An admin must enable it. Sol needs Pro+/Business/Enterprise (not base Pro). Credits pool across the whole org, so a few Sol-heavy devs are absorbed by lighter users. Budget the pool, not the seat. Inline completions stay free.
         <span class="attr">*Illustrative request ≈ 15K input + 3K output tokens. Business: $19/seat, 1,900 credits/mo pooled (promo 3,000 to Sept 1 2026). docs.github.com Copilot billing, 2026-07.</span>
       </div>
     </div>
-    <p class="foot">Effort-level strategy from slide 7 still applies anywhere you have the dial: Codex CLI, the API, ChatGPT. In Copilot, "Sol for hard, Luna for small" is the entire optimization.</p>
+    <p class="foot">Effort-level strategy from slide 8 still applies anywhere you have the dial: Codex CLI, the API, ChatGPT. In Copilot, "Sol for hard, Luna for small" is the entire optimization.</p>
   </div>
-  <div class="pgnum">09 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 10 · RED LINES -->
+<!-- 11 · RED LINES -->
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">Red lines · learned the expensive way</div>
     <h2>Seven ways 5.6 will burn you.</h2>
     <div class="rules">
       <div class="rule"><b>Never give Luna long-context recall.</b> Retrieval collapses to 41.3% past 256K (Sol: 91.5%). Big-repo needle-finding is Sol's job.</div>
-      <div class="rule"><b>Watch the 272K surcharge.</b> Tokens bill at 2× past 272K context (Luna: 200K) in Codex and Copilot alike. Restart sessions; don't grow threads.</div>
-      <div class="rule"><b>Stop conditions in every agentic prompt.</b> "Write the plan, then stop for feedback." Theo: "It's so unlikely to stop that I have to put up the stop signs myself." Cut his burn 4–5×.</div>
-      <div class="rule"><b>Restrain subagents.</b> One line in agent.md — "Only use sub-agents if the user explicitly requests them" — stops autonomous fan-out you didn't order.</div>
+      <div class="rule"><b>Watch the 272K surcharge.</b> Tokens bill at 2x past 272K context (Luna: 200K) in Codex and Copilot alike. Restart sessions; don't grow threads.</div>
+      <div class="rule"><b>Stop conditions in every agentic prompt.</b> "Write the plan, then stop for feedback." Theo: "It's so unlikely to stop that I have to put up the stop signs myself." Cut his burn 4-5x.</div>
+      <div class="rule"><b>Restrain subagents.</b> Add one line to agent.md: "Only use sub-agents if the user explicitly requests them." It stops autonomous fan-out you didn't order.</div>
       <div class="rule"><b>Review every diff.</b> METR measured Sol's reward-hacking rate as the highest of any public model it has assessed, with an above-average tendency to exceed user intent.</div>
-      <div class="rule"><b>Don't default to max/Ultra.</b> OpenAI's own guidance: "do not recommend max globally." Ultra ≈ 3× cost for ~3 points and drains weekly quotas in hours.</div>
-      <div class="rule"><b>Migrate downward.</b> Coming from 5.5? Test one effort level lower first — 5.6 usually holds quality with fewer tokens.</div>
+      <div class="rule"><b>Don't default to max/Ultra.</b> OpenAI's own guidance: "do not recommend max globally." Ultra costs ~3x for ~3 points and drains weekly quotas in hours.</div>
+      <div class="rule"><b>Migrate downward.</b> Coming from 5.5? Test one effort level lower first. 5.6 usually holds quality with fewer tokens.</div>
     </div>
   </div>
-  <div class="pgnum">10 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 11 · VOICES -->
+<!-- 12 · VOICES -->
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow">Signal through the noise · who says what</div>
-    <h2>The voices, unfiltered.</h2>
+    <div class="eyebrow">Named sources · quotes and field reports</div>
+    <h2>Who says what.</h2>
     <div class="quotes">
       <div class="quote"><p>"5.6 Sol High is the only thing in the good quadrant of cost to intelligence."</p><div class="attr"><b>Theo (t3.gg)</b> · after ~$200k of Sol tokens · via BigGo, 2026-07-13. Bias note: has done sponsored OpenAI work before; this cycle is restraint-focused.</div></div>
-      <div class="quote"><p>"Sol is a Porsche and Fable is a warp drive." Sol executes brilliantly once direction is set — but scored 56/100 vs Fable's 90 on their architecture rubric.</p><div class="attr"><b>Dan Shipper / Every.to</b> · every.to/vibe-check, 2026-07-08</div></div>
+      <div class="quote"><p>"Sol is a Porsche and Fable is a warp drive." Sol executes well once direction is set. It scored 56/100 vs Fable's 90 on their architecture rubric.</p><div class="attr"><b>Dan Shipper / Every.to</b> · every.to/vibe-check, 2026-07-08</div></div>
       <div class="quote"><p>"Very competent… so far it hasn't struck me as better than Fable at the kind of complex coding tasks I've been using." His effort-spread test: $0.71 (Luna, none) to $48.55 (Sol, max) for the same prompt.</p><div class="attr"><b>Simon Willison</b> · simonwillison.net, 2026-07-09</div></div>
-      <div class="quote"><p>Terra xhigh "consumed almost the entire 5-hour usage window within only a few minutes." Workaround: rolled back to GPT-5.4.</p><div class="attr"><b>Field report</b> · openai/codex issue #32606, 2026-07-12 — the strongest caution against assuming Terra is the cheap option.</div></div>
+      <div class="quote"><p>Terra xhigh "consumed almost the entire 5-hour usage window within only a few minutes." Workaround: rolled back to GPT-5.4.</p><div class="attr"><b>Field report</b> · openai/codex issue #32606, 2026-07-12. The strongest caution against assuming Terra is the cheap option.</div></div>
     </div>
     <div class="callout" style="margin-top:18px">
-      <em>Where they genuinely disagree:</em> the everyday default. Theo says Sol high; Vellum and GitHub say Terra medium; Raschka says there is no universal default. The AA cost data sides with the barbell — which is why this deck recommends it.
+      <em>Where they genuinely disagree:</em> the everyday default. Theo says Sol high. Vellum and GitHub say Terra medium. Raschka says there is no universal default. The AA cost data sides with the barbell, so that is what this deck recommends.
     </div>
   </div>
-  <div class="pgnum">11 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
-<!-- 12 · SOURCES -->
+<!-- 13 · SOURCES -->
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">Sources &amp; fine print</div>
@@ -601,9 +665,9 @@
         <tr><td>Practitioners</td><td class="why">Theo/t3.gg (via BigGo) · Simon Willison · Every.to · Addy Osmani · Sebastian Raschka · Vellum · Latent Space · OpenAI dev forum · openai/codex #32606 · METR via byteiota</td></tr>
       </tbody>
     </table>
-    <p class="foot">Honesty ledger: Fable 5 cost/task is derived (~⅓ rule), not AA-published · AA's per-effort cost curves aren't available as data — the Pareto quote rests on their analysis, and max-effort points alone flatter Terra · Reddit was unreachable; Reddit quotes are secondhand via aggregators · Theo's effort curve is secondhand via BigGo · per-model accent colors are a design inference from the launch art, not OpenAI branding. Compiled 2026-07-14 · ai-work-os · numbers go stale — recheck monthly.</p>
+    <p class="foot">Honesty ledger: Fable 5 cost/task is derived (the one-third rule), not AA-published · AA's per-effort cost curves aren't available as data; the Pareto quote rests on their analysis, and max-effort points alone flatter Terra · Reddit was unreachable; Reddit quotes are secondhand via aggregators · Theo's effort curve is secondhand via BigGo · per-model accent colors are a design inference from the launch art, not OpenAI branding. Compiled 2026-07-14 · ai-work-os · numbers go stale; recheck monthly.</p>
   </div>
-  <div class="pgnum">12 / 12</div>
+  <div class="pgnum"></div>
 </section>
 
 </main>
@@ -613,6 +677,8 @@
   const slides = [...document.querySelectorAll('.slide')];
   const dots = document.getElementById('dots');
   slides.forEach((s,i)=>{
+    const pg=s.querySelector('.pgnum');
+    if(pg) pg.textContent=String(i+1).padStart(2,'0')+' / '+slides.length;
     const a=document.createElement('a');
     a.href='#'; a.setAttribute('aria-label','Slide '+(i+1));
     a.addEventListener('click',e=>{e.preventDefault();slides[i].scrollIntoView({behavior:'smooth'})});
