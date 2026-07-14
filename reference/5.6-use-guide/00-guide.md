@@ -10,9 +10,9 @@ The answer first. Synthesized 2026-07-14 from Artificial Analysis data, OpenAI d
 
 ## The one-paragraph version
 
-Run a **barbell, not a ladder**: **Luna for the small stuff, Sol for the hard stuff, and skip Terra by default** — Artificial Analysis shows every Terra config is beaten by some Sol or Luna config on the intelligence-vs-cost frontier. Where you have an effort dial (Codex CLI / API — **not** Copilot, which hides it), the working default is **Sol Medium, escalating to Sol High for anything hard or longer than ~10 minutes**; below that, prefer **Luna at high effort over Terra** for cheap work (Raschka: "Luna xhigh may be better AND cheaper than Sol Medium"). Keep **Max/Ultra as break-glass** (~2× cost for ~4 pts, per Theo's curve). Plan/architect with your highest-judgment model, implement with Sol — and always give 5.6 explicit stop conditions, because its defining failure mode is not stopping.
+Run a **barbell, not a ladder**: **Luna for the small stuff, Sol for the hard stuff, and skip Terra by default** — Artificial Analysis shows every Terra config is beaten by some Sol or Luna config on the intelligence-vs-cost frontier. The effort dial is available everywhere we work: **VS Code Copilot** (model picker → arrow → Thinking Effort), Codex CLI (`--effort`), and the API. The working default is **Sol Medium, escalating to Sol High for anything hard or longer than ~10 minutes**; below that, prefer **Luna at high effort over Terra** for cheap work (Raschka: "Luna xhigh may be better AND cheaper than Sol Medium"). Keep **Max/Ultra as break-glass** (~2× cost for ~4 pts, per Theo's curve; Ultra isn't in Copilot at all). Plan/architect with your highest-judgment model, implement with Sol — and always give 5.6 explicit stop conditions, because its defining failure mode is not stopping.
 
-## Decision matrix — effort dial available (Codex CLI / API / ChatGPT)
+## Decision matrix — model + effort (VS Code Copilot / Codex CLI / API)
 
 | Dev task | Use | Why (evidence) |
 |---|---|---|
@@ -26,15 +26,13 @@ Run a **barbell, not a ladder**: **Luna for the small stuff, Sol for the hard st
 | Large parallelizable audits/migrations | **Sol xhigh** first; **Ultra** only if truly parallel | Practitioners prefer xhigh — fewer subagents, easier steering; Ultra drains weekly quotas in hours [04] |
 | Bulk classification / summarization / batch pipelines | **Luna** (orchestrated, batched) | $0.21/task; but see red line below [01] |
 
-## Decision matrix — Copilot (no effort dial; model choice is the whole game)
+## Copilot mechanics (VS Code)
 
-| Situation | Pick |
-|---|---|
-| Quick questions, small edits, high-volume lookups | **Luna** (3.3 credits/typical request) |
-| Anything hard: multi-file refactors, agent sessions, debugging | **Sol** (16.5 credits — 5× Luna; worth it when the task is real) |
-| "I don't want to think about it" / can't access Sol (base Pro) | **Terra** — acceptable, not optimal |
+The matrix above applies directly in VS Code — the Thinking Effort submenu lives behind the arrow next to the model name in the Copilot picker (default medium, sticks per session). Copilot-specific caveats:
 
-Copilot notes: GPT-5.6 policy is **off by default** for Business/Enterprise (admin must enable); Sol needs Pro+/Business/Enterprise; credits pool org-wide so budget at pool level; inline completions are free. Details: [02].
+- **No Ultra** — base Sol only; the parallel multi-agent mode is Codex/ChatGPT/API.
+- **Custom agents pin models, not efforts** — `.github/agents/*.agent.md` frontmatter takes `model:` but no effort key yet, so "orchestrator plans on Sol high, subagents run Luna xhigh" needs a manual effort flip per session, not a declarative config.
+- GPT-5.6 policy is **off by default** for Business/Enterprise (admin must enable); Sol needs Pro+/Business/Enterprise; credits pool org-wide so budget at pool level; inline completions are free; effort bills as more reasoning tokens, no multiplier. Details: [02].
 
 ## Red lines (things that will burn you)
 

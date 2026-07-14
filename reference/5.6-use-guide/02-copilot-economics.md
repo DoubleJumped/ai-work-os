@@ -26,7 +26,14 @@ Output-cost ratio **Sol : Terra : Luna = 5 : 2.5 : 1**. Anchors: Claude Opus 4.8
 
 ## What Copilot exposes (and doesn't)
 
-- Picker shows **three plain models** — no "Terra (high)" variants, **no reasoning-effort dial, no Ultra mode**. Copilot chooses effort internally; effort-level strategy only applies in Codex CLI / API / ChatGPT. (as of 2026-07, sources: https://docs.github.com/en/copilot/reference/ai-models/supported-models; https://byteiota.com/gpt56-github-copilot-model-picker/)
+- **VS Code HAS a reasoning dial**: model picker → `>` arrow next to the model name → **Thinking Effort** submenu. Six levels for GPT-5.6 (none/low/medium/high/xhigh/max) per the launch changelog; default **medium** with adaptive reasoning; the setting sticks per model per session. (as of 2026-07-14, sources: https://github.blog/changelog/2026-07-09-openais-gpt-5-6-sol-terra-and-luna-are-now-available-in-github-copilot/ "Six reasoning effort levels… Adjust context size and reasoning effort from a unified picker"; https://code.visualstudio.com/docs/agent-customization/language-models)
+  - Doc-lag flag: the generic VS Code doc still lists only none→high; the changelog's six-level claim for 5.6 is not screenshot-confirmed. Verify in your own picker.
+  - Old settings keys (`github.copilot.chat.responsesApiReasoningEffort` etc.) are deprecated; the picker is the supported path.
+- **Copilot CLI**: `--effort low|medium|high|xhigh` (or `effortLevel` in ~/.copilot/config.json); no none/max. (source: https://github.com/github/copilot-cli/issues/2904)
+- The dial is documented for **VS Code + CLI only**; other surfaces (Visual Studio, JetBrains, web, cloud coding agent) get the models without a documented effort control.
+- **No Ultra mode in Copilot** — base Sol only; Ultra multi-agent lives in Codex/ChatGPT Work/Responses API.
+- **Custom agents (`.github/agents/*.agent.md`) can pin a model, NOT an effort** — effort is session-global. Feature requests open (microsoft/vscode #313546, copilot-cli #2904), unimplemented as of 2026-07-14. So "this subagent = Luna xhigh" is not declaratively configurable in Copilot yet.
+- Effort billing: higher effort = more reasoning tokens billed as output at list price. **No effort multiplier.**
 - **Sol requires Pro+/Max/Business/Enterprise** — not base Pro. Terra and Luna on all paid plans.
 - **Business/Enterprise: GPT-5.6 policy is OFF by default** — an admin must enable it or nobody sees the models. (as of 2026-07-09, source: https://github.blog/changelog/2026-07-09-openais-gpt-5-6-sol-terra-and-luna-are-now-available-in-github-copilot/)
 - Auto model selection earns a ~10% discount.
@@ -50,4 +57,4 @@ Output-cost ratio **Sol : Terra : Luna = 5 : 2.5 : 1**. Anchors: Claude Opus 4.8
 | Terra-heavy | $0.083 (8.3 cr) | $24.75 | ~1.3× |
 | Luna-heavy | $0.033 (3.3 cr) | $9.90 | comfortably inside |
 
-Implication: in Copilot the only lever is **which of the three models you pick** — that's a 5× swing. The cost-optimal play per [01-cost-per-intelligence.md](01-cost-per-intelligence.md) is the Luna↔Sol barbell; Terra is the "don't want to think about it" middle.
+Implication: in Copilot you have **two levers — model (a 5× price swing) and Thinking Effort (a token-volume swing)**. The cost-optimal play per [01-cost-per-intelligence.md](01-cost-per-intelligence.md) is the Luna↔Sol barbell with effort at medium, raised to high only for hard work; Terra is the "don't want to think about it" middle.

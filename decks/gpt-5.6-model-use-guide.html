@@ -325,7 +325,7 @@
   <div class="wrap">
     <div class="eyebrow"><b>TL;DR</b> · the whole deck in one slide</div>
     <h2>Run a barbell, not a ladder.</h2>
-    <p class="lede">Two models cover almost everything. Use <b>Luna</b> for small, well-defined work. Use <b>Sol</b> for hard, long, or ambiguous work. Where you have a reasoning dial (Codex CLI / API), default to <b>Sol&nbsp;medium</b>. Raise to <b>Sol&nbsp;high</b> for anything difficult or longer than ~10 minutes.</p>
+    <p class="lede">Two models cover almost everything. Use <b>Luna</b> for small, well-defined work. Use <b>Sol</b> for hard, long, or ambiguous work. Default to <b>Sol&nbsp;medium</b>. Raise to <b>Sol&nbsp;high</b> for anything difficult or longer than ~10 minutes. In VS Code, the dial is in the Copilot model picker.</p>
     <div class="barbell">
       <div class="bell luna">
         <span class="chip luna"><i></i>Luna</span>
@@ -372,20 +372,20 @@
         <h3 class="small">Plan on Sol high, work on Luna xhigh</h3>
         <ol>
           <li>Plan and decompose with <b>Sol high</b> (xhigh for architecture).</li>
-          <li>Hand each bounded task to a <b>Luna xhigh</b> subagent.</li>
+          <li>Run each bounded task on <b>Luna xhigh</b>: switch model + effort in the picker, or use Codex subagents.</li>
           <li>Review every diff yourself before merging.</li>
         </ol>
-        <div class="basis">Raschka: "Luna with extra-high effort may be better and cheaper than Sol with medium effort." Theo: Luna belongs "orchestrated by a smarter agent," not driven directly.</div>
+        <div class="basis">Raschka: "Luna with extra-high effort may be better and cheaper than Sol with medium effort." Theo: Luna belongs "orchestrated by a smarter agent," not driven directly. In Copilot the effort flip is manual: custom agents can pin a model, not an effort.</div>
       </div>
       <div class="card luna">
-        <div class="role">Pattern 3 · Copilot only</div>
-        <h3 class="small">No dial: Luna small, Sol hard</h3>
+        <div class="role">Pattern 3 · VS Code setup</div>
+        <h3 class="small">Where the dial lives</h3>
         <ol>
-          <li><b>Luna</b> for quick questions, small edits, lookups.</li>
-          <li><b>Sol</b> for refactors, debugging, agent sessions.</li>
-          <li><b>Terra</b> only when Sol isn't on your plan.</li>
+          <li>Copilot model picker → <b>arrow next to the model name</b> → Thinking Effort.</li>
+          <li>Default is <b>medium</b>; your choice sticks per model per session.</li>
+          <li>CLI: <b>--effort low|medium|high|xhigh</b>.</li>
         </ol>
-        <div class="basis">Copilot hides the effort dial, so the model picker is the whole decision. Details on slide 10.</div>
+        <div class="basis">Six levels for GPT-5.6 per the GitHub changelog. No Ultra in Copilot. Higher effort bills as more reasoning tokens, no multiplier. Details on slide 10.</div>
       </div>
     </div>
   </div>
@@ -560,7 +560,7 @@
 <section class="slide">
   <div class="bg-flare"></div>
   <div class="wrap">
-    <div class="eyebrow">The reasoning dial · Codex CLI / API / ChatGPT (not Copilot)</div>
+    <div class="eyebrow">The reasoning dial · VS Code Copilot · Codex CLI · API</div>
     <h2>High is the elbow. Max is a luxury.</h2>
     <p class="lede">Six effort levels (<span class="num">none → low → medium → high → xhigh → max</span>) plus <b>Ultra</b>, a parallel multi-agent mode. Quality climbs steeply to <b>high</b>, then crawls while cost keeps doubling.</p>
     <div class="split" style="margin-top:22px">
@@ -599,6 +599,7 @@
     <div class="callout">
       <em>The rules:</em>
       <ul>
+        <li>In VS Code: model picker → arrow → <em>Thinking Effort</em>.</li>
         <li>Default is <em>medium</em>.</li>
         <li>Raise to high/xhigh "only when evals show a meaningful gain."</li>
         <li>"Do not recommend max globally."</li>
@@ -616,7 +617,7 @@
 <!-- 9 · MATRIX (dial) -->
 <section class="slide">
   <div class="wrap">
-    <div class="eyebrow">Decision matrix · where you control the dial</div>
+    <div class="eyebrow">Decision matrix · VS Code Copilot · Codex CLI · API</div>
     <h2>Task → model + effort.</h2>
     <table class="tbl">
       <thead><tr><th>Dev task</th><th>Use</th><th>Why</th></tr></thead>
@@ -628,7 +629,7 @@
         <tr><td>Planning · architecture · scoping</td><td><span class="chip sol"><i></i>Sol xhigh</span> <span class="chip claude"><i></i>or Fable 5</span></td><td class="why">Sol over-builds (56 vs Fable's 90 on Every.to's architecture rubric). Plan high-judgment, hand Sol the plan.</td></tr>
         <tr><td>Repo-wide, SWE-bench-style changes</td><td><span class="chip claude"><i></i>Fable 5 / Opus</span></td><td class="why">Sol's one clear benchmark gap: SWE-Bench Pro 64.6% vs Fable's 80%.</td></tr>
         <tr><td>One brutally hard, interconnected problem</td><td><span class="chip sol"><i></i>Sol max</span></td><td class="why">Break-glass: +4 pts over high at 2.4x cost. Pay only when correctness ≫ budget.</td></tr>
-        <tr><td>Parallelizable audits / migrations</td><td><span class="chip sol"><i></i>Sol xhigh</span> <span class="chip plain"><i></i>Ultra rarely</span></td><td class="why">xhigh = fewer subagents, easier steering. Ultra only for truly parallel work.</td></tr>
+        <tr><td>Parallelizable audits / migrations</td><td><span class="chip sol"><i></i>Sol xhigh</span> <span class="chip plain"><i></i>Ultra rarely</span></td><td class="why">xhigh = fewer subagents, easier steering. Ultra is Codex/API only, not Copilot.</td></tr>
         <tr><td>Bulk classification · summarization · batch pipelines</td><td><span class="chip luna"><i></i>Luna (batched)</span></td><td class="why">$0.21/task, 216 tok/s. Never for long-context recall (slide 11).</td></tr>
       </tbody>
     </table>
@@ -641,23 +642,24 @@
 <section class="slide">
   <div class="wrap">
     <div class="eyebrow">GitHub Copilot · where most of us live</div>
-    <h2>In Copilot, the model picker is the whole game.</h2>
-    <p class="lede">Copilot exposes <b>no effort dial and no Ultra</b> for GPT-5.6: just three models, token-billed in AI credits (1 credit = $0.01). Output cost ratio is fixed at <b class="num">Sol : Terra : Luna = 5 : 2.5 : 1</b>.</p>
+    <h2>One picker sets model and effort.</h2>
+    <p class="lede">GPT-5.6 in Copilot is token-billed in AI credits (1 credit = $0.01); output cost ratio is <b class="num">Sol : Terra : Luna = 5 : 2.5 : 1</b>. The Thinking Effort submenu sits behind the arrow next to the model name. Higher effort bills as more reasoning tokens, no multiplier.</p>
     <div class="split" style="margin-top:26px">
       <table class="tbl" style="margin-top:0">
         <thead><tr><th>Situation</th><th>Pick</th><th>Typical request*</th></tr></thead>
         <tbody>
-          <tr><td>Quick questions · small edits · high-volume lookups</td><td><span class="chip luna"><i></i>Luna</span></td><td class="num">≈3.3 credits</td></tr>
-          <tr><td>Multi-file refactors · agent sessions · hard debugging</td><td><span class="chip sol"><i></i>Sol</span></td><td class="num">≈16.5 credits</td></tr>
-          <tr><td>"Don't want to think about it" · Sol not on your plan</td><td><span class="chip terra"><i></i>Terra</span></td><td class="num">≈8.3 credits</td></tr>
+          <tr><td>Quick questions · small edits · high-volume lookups</td><td><span class="chip luna"><i></i>Luna high</span></td><td class="num">≈3.3 credits</td></tr>
+          <tr><td>Everyday features · routine multi-file work</td><td><span class="chip sol"><i></i>Sol medium</span></td><td class="num">≈16.5 credits</td></tr>
+          <tr><td>Hard debugging · long agent sessions</td><td><span class="chip sol"><i></i>Sol high</span></td><td class="num">more (extra reasoning tokens)</td></tr>
+          <tr><td>Sol not on your plan</td><td><span class="chip terra"><i></i>Terra medium</span></td><td class="num">≈8.3 credits</td></tr>
         </tbody>
       </table>
       <div class="callout">
-        <em>Before any of this works:</em> the GPT-5.6 policy is <em>off by default</em> for Business/Enterprise. An admin must enable it. Sol needs Pro+/Business/Enterprise (not base Pro). Credits pool across the whole org, so a few Sol-heavy devs are absorbed by lighter users. Budget the pool, not the seat. Inline completions stay free.
-        <span class="attr">*Illustrative request ≈ 15K input + 3K output tokens. Business: $19/seat, 1,900 credits/mo pooled (promo 3,000 to Sept 1 2026). docs.github.com Copilot billing, 2026-07.</span>
+        <em>Before any of this works:</em> the GPT-5.6 policy is <em>off by default</em> for Business/Enterprise. An admin must enable it. Sol needs Pro+/Business/Enterprise (not base Pro). Credits pool across the whole org: budget the pool, not the seat. Inline completions stay free. Not in Copilot: <em>Ultra</em> (Codex/API only), and per-agent effort pinning (custom agents take a model, not an effort).
+        <span class="attr">*Illustrative request ≈ 15K input + 3K output tokens at medium effort. Business: $19/seat, 1,900 credits/mo pooled (promo 3,000 to Sept 1 2026). docs.github.com Copilot billing + github.blog changelog, 2026-07.</span>
       </div>
     </div>
-    <p class="foot">Effort-level strategy from slide 8 still applies anywhere you have the dial: Codex CLI, the API, ChatGPT. In Copilot, "Sol for hard, Luna for small" is the entire optimization.</p>
+    <p class="foot">Same strategy as slide 8, applied in the picker. CLI equivalent: --effort low|medium|high|xhigh.</p>
   </div>
   <div class="pgnum"></div>
 </section>
@@ -708,11 +710,11 @@
       <tbody>
         <tr><td>Artificial Analysis</td><td class="why">gpt-5-6-has-landed article · per-model pages · intelligence-vs-cost-across-sol-terra-luna (Pareto claim) · 2026-07-09/14</td></tr>
         <tr><td>OpenAI</td><td class="why">openai.com/index/gpt-5-6 · developers.openai.com model docs + prompt-guidance (effort levels, "test one level lower") · 2026-07-09</td></tr>
-        <tr><td>GitHub</td><td class="why">Copilot changelog 2026-07-09 · docs.github.com models-and-pricing + usage-based billing · 2026-07</td></tr>
+        <tr><td>GitHub / VS Code</td><td class="why">Copilot changelog 2026-07-09 (six effort levels in the unified picker) · docs.github.com models-and-pricing + usage-based billing · code.visualstudio.com language-models doc (Thinking Effort submenu) · 2026-07</td></tr>
         <tr><td>Practitioners</td><td class="why">Theo/t3.gg (via BigGo) · Simon Willison · Every.to · Addy Osmani · Sebastian Raschka · Vellum · Latent Space · OpenAI dev forum · openai/codex #32606 · METR via byteiota</td></tr>
       </tbody>
     </table>
-    <p class="foot">Honesty ledger: Fable 5 cost/task is derived (the one-third rule), not AA-published · AA's per-effort cost curves aren't available as data; the Pareto quote rests on their analysis, and max-effort points alone flatter Terra · Reddit was unreachable; Reddit quotes are secondhand via aggregators · Theo's effort curve is secondhand via BigGo · per-model accent colors are a design inference from the launch art, not OpenAI branding. Compiled 2026-07-14 · ai-work-os · numbers go stale; recheck monthly.</p>
+    <p class="foot">Honesty ledger: Fable 5 cost/task is derived (the one-third rule), not AA-published · AA's per-effort cost curves aren't available as data; the Pareto quote rests on their analysis, and max-effort points alone flatter Terra · Reddit was unreachable; Reddit quotes are secondhand via aggregators · Theo's effort curve is secondhand via BigGo · the six-level effort dial in the VS Code picker is per GitHub's changelog; the VS Code doc page lags (lists none→high), so check your own picker · per-model accent colors are a design inference from the launch art, not OpenAI branding. Compiled 2026-07-14 · ai-work-os · numbers go stale; recheck monthly.</p>
   </div>
   <div class="pgnum"></div>
 </section>
